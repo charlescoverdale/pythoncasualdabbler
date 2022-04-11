@@ -5,7 +5,8 @@ language:
 rmd_files: [
   "index.Rmd",
   "02-charts.Rmd",
-  "setup.Rmd",
-  "write.Rmd"]
+  "03-making_maps.Rmd",
+  "04-hypothesis-testing.Rmd",
+  "05-regression_analysis.Rmd"]
 delete_merged_file: true 
 output_dir: "docs"
