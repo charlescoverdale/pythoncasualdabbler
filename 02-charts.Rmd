@@ -1,9 +1,9 @@
----
-title: "Python learning journal"
-author: "Charles Coverdale"
-date: "28/12/2021"
-output: html_document
----
+
+# Making beautiful charts in Python
+
+## What's in a chart?
+
+XX
 
 ```{r setup, include=FALSE}
 

@@ -1,5 +1,16 @@
 welcome
 learn-all-about-bookdown
+making-beautiful-charts-in-python
+whats-in-a-chart
+importing-python-packages
+importing-and-cleaning-data
+bar-charts
+stacked-bar-charts
+line-charts
+scatter-plot
+histogram
+multiple-charts-in-single-plot
+annotating-charts
 setup
 get-bookdown-tutorial-going-on-your-local-computer
 create-your-awesome-book-github-repo
