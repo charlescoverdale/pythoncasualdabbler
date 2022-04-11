@@ -1,8 +1,6 @@
-# R cookbook for the casual dabbler
+# Python cookbook for the casual dabbler
 
-*A practical guide for using R for analysis and visualisation*
-
-![Python Cookbook for the Casual Dabbler]
+*A practical guide for using Python for analysis and visualisation*
 
 This repo contains the code use to produce the first edition of [Python Cookbook for the Casual Dabbler](https://charlescoverdale.github.io/pythoncasualdabbler/)
 
