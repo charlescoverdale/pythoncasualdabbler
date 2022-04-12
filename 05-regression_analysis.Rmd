@@ -1,11 +1,6 @@
----
-title: "Regression analysis"
-author: "Charles Coverdale"
-date: "28/12/2021"
-output: html_document
----
+# Regression analysis
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 

@@ -1,13 +1,6 @@
----
-title: "Hypothesis testing"
-author: "Charles Coverdale"
-date: "28/12/2021"
-output: 
-  html_document:
-    code_folding: hide
----
 
-```{r setup, include=FALSE}
+
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 
