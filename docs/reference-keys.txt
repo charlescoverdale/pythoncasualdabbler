@@ -1,4 +1,8 @@
 welcome
+usage
+additional-resources
+limitations
+about-the-author
 making-beautiful-charts-in-python
 whats-in-a-chart
 importing-python-packages

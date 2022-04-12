@@ -1,4 +1,4 @@
---- 
+---
 title: "Python Cookbook for the Casual Dabbler"
 author: "Charles Coverdale"
 date: "`r Sys.Date()`"
@@ -14,9 +14,32 @@ description: "A quick-start guide for non-experts using python for data analysis
 
 # Welcome {#welcome}
 
-G'day!
+G'day and welcome to *Python cookbook for the casual dabbler.*
 
+**Some history:** I use the R language a lot for work and for side projects. However I'll be the first to admit - for some things, python is simply ***much*** better.
 
+Rather than storing my bits and bobs of python code in random files and repos, I've created this book to systematize key the key processes I use often, in one convenient location.
 
+## Usage
 
+In each chapter I've written up the background, methodology and code for a separate piece of analysis.
 
+Most of this code will not be extraordinary to the seasoned RPython aficionado. The vast majority can be found elsewhere if you dig around on stackexchange or read some of the many programming books.
+
+However I find that in classic Pareto style \~20% of my code contributes to the **vast** majority of my work output. Having this on hand will hopefully be useful to both myself and others.
+
+## Additional resources
+
+The Python community is continually writing new books and package documentation with great worked examples. Some of my favourites are:
+
+-   [Geocomputation with R](https://bookdown.org/robinlovelace/geocompr/)
+
+## Limitations
+
+I'll be honest with you - there's bound to be bugs galore in this. If you find one (along with spelling errors etc) please email me at charlesfcoverdale\@gmail.com with the subject line 'R cookbook for the casual dabbler'.
+
+------------------------------------------------------------------------
+
+## About the author
+
+Charles Coverdale is an economist based in Melbourne, Australia. He is passionate about economics, climate science, and building talented teams. You can get in touch with Charles [on twitter](https://twitter.com/cfcoverdale) to hear more about his current projects.

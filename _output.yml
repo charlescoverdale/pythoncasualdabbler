@@ -1,19 +1,13 @@
 bookdown::gitbook:
-  css:
-    - lib/css/bootstrap.min.css
-    - lib/css/style.css
-    - lib/css/lesson.css
+  css: style.css
   includes:
   config:
     toc:
       before: |
-        <li><a href="./">Mini Bookdown Tutorial</a></li>
+        <li><a href="./">Python Cookbook for the Casual Dabbler</a></li> 
+        
       after: |
-        <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/jules32/bookdown-tutorial/edit/master/%s
+        <li><a href="https://https://www.linkedin.com/in/charlescoverdale/" target="blank">Connect with me on linkedin</a></li>
+        <li><a href="https://github.com/charlescoverdale/pythoncasualdabbler" target="blank">Get the code on github</a></li>
+    edit: https://github.com/charlescoverdale/casualdabbler/edit/master/%s
     download: ["pdf"]
-#bookdown::pdf_book:
-#  includes:
-#    in_header: _preamble.tex
-#  latex_engine: xelatex
-#  keep_tex: no
