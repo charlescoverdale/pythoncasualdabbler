@@ -16,27 +16,38 @@ description: "A quick-start guide for non-experts using python for data analysis
 
 G'day and welcome to *Python cookbook for the casual dabbler.*
 
-**Some history:** I use the R language a lot for work and for side projects. However I'll be the first to admit - for some things, python is simply ***much*** better.
+**Some history:** I use the R language a lot for work and for side projects. However I'll be the first to admit - for some things, python is simply *much* better.
 
 Rather than storing my bits and bobs of python code in random files and repos, I've created this book to systematize key the key processes I use often, in one convenient location.
 
-## Usage
+##  Using this book
 
 In each chapter I've written up the background, methodology and code for a separate piece of analysis.
 
-Most of this code will not be extraordinary to the seasoned RPython aficionado. The vast majority can be found elsewhere if you dig around on stackexchange or read some of the many programming books.
+Most of this code will not be extraordinary to the seasoned Python aficionado. The vast majority can be found elsewhere if you dig around on stackexchange or read some of the many python programming blogs and books.
 
-However I find that in classic Pareto style \~20% of my code contributes to the **vast** majority of my work output. Having this on hand will hopefully be useful to both myself and others.
+However I find that in classic Pareto style \~20% of my code contributes to the *vast* majority of my work output. Having this on hand will hopefully be useful to both myself and others.
 
-## Additional resources
+##  Additional resources
 
 The Python community is continually writing new books and package documentation with great worked examples. Some of my favourites are:
 
--   [Geocomputation with R](https://bookdown.org/robinlovelace/geocompr/)
+-   [Python Beginners Guide](https://wiki.python.org/moin/BeginnersGuide/Programmers)
+-   [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
 ## Limitations
 
-I'll be honest with you - there's bound to be bugs galore in this. If you find one (along with spelling errors etc) please email me at charlesfcoverdale\@gmail.com with the subject line 'R cookbook for the casual dabbler'.
+I'll be honest with you - there's bound to be bugs galore in this. If you find one (along with spelling errors etc) please email me at charlesfcoverdale\@gmail.com with the subject line 'Python Cookbook for the Casual Dabbler'.\
+
+## Why write a python book using the R publishing language?
+
+It's a fair question. The simplest answer is that the R Markdown and Bookdown languages are excellent - and far more conducive to longer form content compared to jupyter notebooks.
+
+There are some quirks however. For example, to get python to run within the RStudio IDE I need to load up each chapter with some code (written in R) that looks something like this:
+
+`library(reticulate)use_condaenv("tf")reticulate::py_install("numpy")reticulate::py_install("geopy")`
+
+Interested in publishing your own book using R Markdown or Bookdown? There's some [excellent books](https://bookdown.org/yihui/rmarkdown/) on the topic, however I find [this guide](https://jules32.github.io/bookdown-tutorial/setup.html#moving-forward) as by far the most useful.
 
 ------------------------------------------------------------------------
 

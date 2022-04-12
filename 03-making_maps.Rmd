@@ -1,7 +1,13 @@
 
-## Making maps with python
+# Making maps with python
 
-```{r, include=FALSE}
+Maps are a great way to communicate data. They're easily understandable, flexible, and more intuitive than a chart. There's been numerous studies showing that the average professional often struggles to interpret the units on a y-axis, let alone understand trends in scatter or line graphs.
+
+Making maps in R takes some initial investment (note: they can be fiddly). However once you have some code you know and understand, spinning up new pieces of analysis can happen in minutes, rather than hours or days.
+
+The aim of this quick-reference guide is to get you from 'I can produce a map in R' to something more like 'I can conduct spatial analysis and produce a visual which is ready to send without any further work'.
+
+```{r, results='hide', warning=FALSE,message=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -20,7 +26,7 @@ reticulate::py_install("geocoder")
 
 Let's load in some libraries that we will use again and again when making charts.
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -39,7 +45,7 @@ Just like a pandas dataframe, the `geopandas` package allows us to us shapefiles
 
 We'll go ahead and download some [shapefiles from the ABS.](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files)
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Read the SHP file
 SA4_shp = gpd.read_file('ASGS/SA4_2021_AUST_SHP_GDA2020/SA4_2021_AUST_GDA2020.shp')    
@@ -72,7 +78,7 @@ plt.show()
 
 Here's another example using a shapefile for WA
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Load Geometry File
 WA_shp = gpd.read_file('data/NOV21_WA_LOC_POLYGON_shp_GDA2020/wa_localities.shp')    
@@ -90,7 +96,7 @@ plt.show()
 
 **Using Nominatim to find the coordinates of a street address**
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 from geopy.geocoders import Nominatim
 
@@ -107,7 +113,7 @@ print(test_location.raw)
 
 **Using Nominatim to find the street address from a set of coordinates**
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="coverdale")
@@ -126,7 +132,7 @@ print(test_location.raw)
 
 Geopy can calculate geodesic distance between two points using the [geodesic distance](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid) or the [great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance), with a default of the geodesic distance available as the function geopy.distance.distance.
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 #Here's an example usage of the geodesic distance:
 from geopy.distance import geodesic
@@ -155,7 +161,7 @@ hospital_data_clean[['lat', 'lon', 'altitude']] = pd.DataFrame(hospital_data['po
 
 hospital_data_clean.head(5)
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Import necessary modules
 import geopy
@@ -206,7 +212,7 @@ hospital_geodataframe.head(5)
 
 Let's now plot these points on a map of Queensland. We'll also need to load in the shape of Queensland as the 'base map'.
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Read the SHP file
 STE_shp = gpd.read_file('ASGS/STE_2021_AUST_SHP_GDA2020/STE_2021_AUST_GDA2020.shp')    
@@ -225,7 +231,7 @@ STE_shp_QLD.head()
 
 Now we plot the two layers together
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 fig, ax = plt.subplots(1, 1, figsize=(12, 12))
 
@@ -248,7 +254,7 @@ This exercise loosely follows the [wonderful tutorial created by Carlos Cillerue
 
 It builds off the OSMnx package that allows us to download spatial data from OpenStreetMap.
 
-```{python, warning=FALSE, results=TRUE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 import osmnx as ox
 
@@ -349,7 +355,7 @@ fig.savefig("madridPoster.png", dpi=300, format="png", bbox_inches='tight',
 
 We can also add a water layer for the map above (and combine them in photoshop or similiar)
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 import networkx as nx
 import osmnx as ox
 

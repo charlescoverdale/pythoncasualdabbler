@@ -1,6 +1,6 @@
 # Regression analysis
 
-```{r, include=FALSE}
+```{r, results='hide', warning=FALSE,message=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -12,7 +12,7 @@ use_condaenv("tf")
 
 ## Importing python packages
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
@@ -25,7 +25,7 @@ from matplotlib.ticker import EngFormatter, StrMethodFormatter
 
 The fundamental data type of NumPy is the array type called numpy.ndarray. The rest of this article uses the term array to refer to instances of the type numpy.ndarray.
 
-```{python, warning=FALSE, results=FALSE}
+```{python,results='hide', warning=FALSE,message=FALSE}
 from sklearn.datasets import fetch_california_housing
 
 california_housing = fetch_california_housing(as_frame=True)
@@ -40,7 +40,7 @@ california_housing_df = pd.DataFrame(california_housing.data)
 print(california_housing_df)
 ```
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 california_housing.frame.hist(figsize=(12, 10), bins=30, edgecolor="black")
 
@@ -54,7 +54,7 @@ plt.show()
 
 The next step is to create the regression model as an instance of LinearRegression and fit it with .fit().
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 import sklearn
 from sklearn.linear_model import LinearRegression
@@ -80,7 +80,7 @@ print('slope:', model.coef_)
 
 We can fit different order polynomials by defining the relevant polynomial functions.
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Load in relevant packages
 from numpy import arange
@@ -161,7 +161,7 @@ plt.show()
 
 Now let's try a polynomial model
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Fit a second degree polynomial to the economic data
 from numpy import arange

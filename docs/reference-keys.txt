@@ -1,12 +1,13 @@
 welcome
-usage
+using-this-book
 additional-resources
 limitations
+why-write-a-python-book-using-the-r-publishing-language
 about-the-author
 making-beautiful-charts-in-python
-whats-in-a-chart
 importing-python-packages
 importing-and-cleaning-data
+creating-a-line-chart
 bar-charts
 stacked-bar-charts
 line-charts

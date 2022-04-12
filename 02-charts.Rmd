@@ -1,9 +1,8 @@
 
 # Making beautiful charts in Python
 
-## What's in a chart?
 
-XX
+This chapter contains the code for some of my most used charts and visualization techniques.
 
 ```{r setup, include=FALSE}
 
@@ -19,7 +18,8 @@ use_condaenv("tf")
 
 Let's load in some libraries that we will use again and again when making charts.
 
-```{python}
+```{python, results='hide', warning=FALSE,message=FALSE}
+
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
@@ -32,7 +32,11 @@ from matplotlib.ticker import EngFormatter, StrMethodFormatter
 
 ## Importing and cleaning data
 
-```{python, warning=FALSE, results=FALSE}
+Let's start by importing data from a csv and making it usable. In this example, we'll use the weather profile from 2019 in Melbourne, Australia.
+
+We'll also create a new column for a rolling average of the temperature.
+
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 #Note non-ascii character in csv will stuff up the import, so we add this term: encoding='unicode_escape'
 
@@ -59,6 +63,15 @@ df_weather = df_weather.rename({'Daily global solar exposure (MJ/m*m)':'Solar_ex
 df_weather['Rolling_avg'] = df_weather['Max_temp'].rolling(window=7).mean()
 
 df_weather.head()
+
+```
+
+## Creating a line chart
+
+Now that the data is in a reasonable format (e.g. there is a simple to use 'Date' column), let's go ahead and make a line chart.
+
+
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Now let's plot maximum temperature on a line chart
 
@@ -115,9 +128,13 @@ plt.show()
 
 ```
 
+
+
+
+
 ## Bar charts
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 # Chart 1: Bar plot
 
@@ -160,7 +177,7 @@ plt.show()
 
 ## Stacked bar charts
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 labels = ['Group 1', 'Group 2', 'Group 3', 'Group 4', 'Group 5']
 men_means = [20, 35, 30, 35, 27]
@@ -184,7 +201,7 @@ plt.show()
 
 ## Line charts
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 import matplotlib.ticker as mtick
 
@@ -215,7 +232,7 @@ plt.show()
 
 ## Scatter plot
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 x =[5, 7, 8, 7, 2, 17, 2, 9,
     4, 11, 12, 9, 6] 
@@ -235,7 +252,7 @@ plt.show()
 
 ## Histogram
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 np.random.seed(99)
 
@@ -256,7 +273,7 @@ plt.show()
 
 ## Multiple charts in single plot
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 fig, (ax,ax2) = plt.subplots(ncols=2)
 
@@ -275,7 +292,7 @@ plt.show()
 
 Example taken from the wonderful blog at [Practical Economics](https://practicaleconomics.org/stylised-stylized-economics-charts-in-python-matplotlib-part-1/).
 
-```{python, warning=FALSE, results=FALSE}
+```{python, results='hide', warning=FALSE,message=FALSE}
 
 plt.title('Employment Impact of a Minimum Wage')
 

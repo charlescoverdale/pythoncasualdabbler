@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Making maps with python | Python Cookbook for the Casual Dabbler</title>
+  <meta name="description" content="A quick-start guide for non-experts using python for data analysis." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Making maps with python | Python Cookbook for the Casual Dabbler" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="A quick-start guide for non-experts using python for data analysis." />
+  <meta name="github-repo" content="openscapes/series" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Making maps with python | Python Cookbook for the Casual Dabbler" />
+  
+  <meta name="twitter:description" content="A quick-start guide for non-experts using python for data analysis." />
+  
+
+<meta name="author" content="Charles Coverdale" />
+
+
+<meta name="date" content="2022-04-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="making-beautiful-charts-in-python.html"/>
+<link rel="next" href="hypothesis-testing.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Python Cookbook for the Casual Dabbler</a></li> 
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>1.1</b> Using this book<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#additional-resources"><i class="fa fa-check"></i><b>1.2</b> Additional resources<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#limitations"><i class="fa fa-check"></i><b>1.3</b> Limitations<span></span></a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#why-write-a-python-book-using-the-r-publishing-language"><i class="fa fa-check"></i><b>1.4</b> Why write a python book using the R publishing language?<span></span></a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i><b>1.5</b> About the author<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html"><i class="fa fa-check"></i><b>2</b> Making beautiful charts in Python<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-python-packages"><i class="fa fa-check"></i><b>2.1</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-and-cleaning-data"><i class="fa fa-check"></i><b>2.2</b> Importing and cleaning data<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#creating-a-line-chart"><i class="fa fa-check"></i><b>2.3</b> Creating a line chart<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#bar-charts"><i class="fa fa-check"></i><b>2.4</b> Bar charts<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#stacked-bar-charts"><i class="fa fa-check"></i><b>2.5</b> Stacked bar charts<span></span></a></li>
+<li class="chapter" data-level="2.6" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#line-charts"><i class="fa fa-check"></i><b>2.6</b> Line charts<span></span></a></li>
+<li class="chapter" data-level="2.7" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#scatter-plot"><i class="fa fa-check"></i><b>2.7</b> Scatter plot<span></span></a></li>
+<li class="chapter" data-level="2.8" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#histogram"><i class="fa fa-check"></i><b>2.8</b> Histogram<span></span></a></li>
+<li class="chapter" data-level="2.9" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#multiple-charts-in-single-plot"><i class="fa fa-check"></i><b>2.9</b> Multiple charts in single plot<span></span></a></li>
+<li class="chapter" data-level="2.10" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#annotating-charts"><i class="fa fa-check"></i><b>2.10</b> Annotating charts<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="making-maps-with-python.html"><a href="making-maps-with-python.html"><i class="fa fa-check"></i><b>3</b> Making maps with python<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="making-maps-with-python.html"><a href="making-maps-with-python.html#importing-python-packages-1"><i class="fa fa-check"></i><b>3.1</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="making-maps-with-python.html"><a href="making-maps-with-python.html#making-simple-maps-with-geopandas"><i class="fa fa-check"></i><b>3.2</b> Making simple maps with geopandas<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="making-maps-with-python.html"><a href="making-maps-with-python.html#geocoding-address-data"><i class="fa fa-check"></i><b>3.3</b> Geocoding address data<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="making-maps-with-python.html"><a href="making-maps-with-python.html#open-street-map"><i class="fa fa-check"></i><b>3.4</b> Open Street Map<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-a-new-module"><i class="fa fa-check"></i><b>4.1</b> Importing a new module<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-python-packages-2"><i class="fa fa-check"></i><b>4.2</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#correlation"><i class="fa fa-check"></i><b>4.3</b> Correlation<span></span></a></li>
+<li class="chapter" data-level="4.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#stationary-tests"><i class="fa fa-check"></i><b>4.4</b> Stationary tests<span></span></a></li>
+<li class="chapter" data-level="4.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#t-test-of-the-sample-mean"><i class="fa fa-check"></i><b>4.5</b> t-test of the sample mean<span></span></a></li>
+<li class="chapter" data-level="4.6" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-for-normality"><i class="fa fa-check"></i><b>4.6</b> Testing for normality<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regression-analysis.html"><a href="regression-analysis.html"><i class="fa fa-check"></i><b>5</b> Regression analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="regression-analysis.html"><a href="regression-analysis.html#importing-python-packages-3"><i class="fa fa-check"></i><b>5.1</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="regression-analysis.html"><a href="regression-analysis.html#create-a-model-and-fit-it"><i class="fa fa-check"></i><b>5.2</b> Create a model and fit it<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="regression-analysis.html"><a href="regression-analysis.html#polynomial-regression"><i class="fa fa-check"></i><b>5.3</b> Polynomial regression<span></span></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://https://www.linkedin.com/in/charlescoverdale/" target="blank">Connect with me on linkedin</a></li>
+<li><a href="https://github.com/charlescoverdale/pythoncasualdabbler" target="blank">Get the code on github</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Cookbook for the Casual Dabbler</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="making-maps-with-python" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Making maps with python<a href="making-maps-with-python.html#making-maps-with-python" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Maps are a great way to communicate data. They’re easily understandable, flexible, and more intuitive than a chart. There’s been numerous studies showing that the average professional often struggles to interpret the units on a y-axis, let alone understand trends in scatter or line graphs.</p>
+<p>Making maps in R takes some initial investment (note: they can be fiddly). However once you have some code you know and understand, spinning up new pieces of analysis can happen in minutes, rather than hours or days.</p>
+<p>The aim of this quick-reference guide is to get you from ‘I can produce a map in R’ to something more like ‘I can conduct spatial analysis and produce a visual which is ready to send without any further work.’</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="making-maps-with-python.html#cb18-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-2"><a href="making-maps-with-python.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="making-maps-with-python.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb18-4"><a href="making-maps-with-python.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="making-maps-with-python.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install is a special wrapper from the reticulate package that does &quot;conda install&quot; automatically</span></span>
+<span id="cb18-6"><a href="making-maps-with-python.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="making-maps-with-python.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">use_condaenv</span>(<span class="st">&quot;tf&quot;</span>)</span>
+<span id="cb18-8"><a href="making-maps-with-python.html#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="making-maps-with-python.html#cb18-9" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&quot;geopy&quot;</span>)</span>
+<span id="cb18-10"><a href="making-maps-with-python.html#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="making-maps-with-python.html#cb18-11" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&quot;geocoder&quot;</span>)</span></code></pre></div>
+<div id="importing-python-packages-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Importing python packages<a href="making-maps-with-python.html#importing-python-packages-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s load in some libraries that we will use again and again when making charts.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="making-maps-with-python.html#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="making-maps-with-python.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-3"><a href="making-maps-with-python.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb19-4"><a href="making-maps-with-python.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb19-5"><a href="making-maps-with-python.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb19-6"><a href="making-maps-with-python.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb19-7"><a href="making-maps-with-python.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics</span>
+<span id="cb19-8"><a href="making-maps-with-python.html#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="making-maps-with-python.html#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb19-10"><a href="making-maps-with-python.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.ticker <span class="im">import</span> EngFormatter, StrMethodFormatter</span></code></pre></div>
+</div>
+<div id="making-simple-maps-with-geopandas" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Making simple maps with geopandas<a href="making-maps-with-python.html#making-simple-maps-with-geopandas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Just like a pandas dataframe, the <code>geopandas</code> package allows us to us shapefiles.</p>
+<p>We’ll go ahead and download some <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">shapefiles from the ABS.</a></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="making-maps-with-python.html#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-2"><a href="making-maps-with-python.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the SHP file</span></span>
+<span id="cb20-3"><a href="making-maps-with-python.html#cb20-3" aria-hidden="true" tabindex="-1"></a>SA4_shp <span class="op">=</span> gpd.read_file(<span class="st">&#39;ASGS/SA4_2021_AUST_SHP_GDA2020/SA4_2021_AUST_GDA2020.shp&#39;</span>)    </span>
+<span id="cb20-4"><a href="making-maps-with-python.html#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="making-maps-with-python.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data using Geopandas</span></span>
+<span id="cb20-6"><a href="making-maps-with-python.html#cb20-6" aria-hidden="true" tabindex="-1"></a>SA4_shp.head()</span>
+<span id="cb20-7"><a href="making-maps-with-python.html#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="making-maps-with-python.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the coordinate reference system attached to the shapefile</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="making-maps-with-python.html#cb21-1" aria-hidden="true" tabindex="-1"></a>SA4_shp.crs</span>
+<span id="cb21-2"><a href="making-maps-with-python.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="making-maps-with-python.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for only Greater Melbourne</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="making-maps-with-python.html#cb22-1" aria-hidden="true" tabindex="-1"></a>SA4_shp_MEL <span class="op">=</span> SA4_shp[SA4_shp[<span class="st">&#39;GCC_NAME21&#39;</span>]<span class="op">==</span><span class="st">&#39;Greater Melbourne&#39;</span>] </span>
+<span id="cb22-2"><a href="making-maps-with-python.html#cb22-2" aria-hidden="true" tabindex="-1"></a>SA4_shp_MEL.head()</span>
+<span id="cb22-3"><a href="making-maps-with-python.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="making-maps-with-python.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick plot of the shapefile</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="making-maps-with-python.html#cb23-1" aria-hidden="true" tabindex="-1"></a>SA4_shp_MEL.plot(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>), linewidth<span class="op">=</span><span class="fl">0.1</span>, edgecolor<span class="op">=</span><span class="st">&#39;0.9&#39;</span>, legend <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb23-2"><a href="making-maps-with-python.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="making-maps-with-python.html#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">&#39;Melbourne</span><span class="ch">\n</span><span class="st">CBD&#39;</span>,</span>
+<span id="cb23-4"><a href="making-maps-with-python.html#cb23-4" aria-hidden="true" tabindex="-1"></a>            xy<span class="op">=</span>(<span class="fl">144.96246</span>,<span class="op">-</span><span class="fl">37.81214</span>),</span>
+<span id="cb23-5"><a href="making-maps-with-python.html#cb23-5" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="fl">144.46246</span>,<span class="op">-</span><span class="fl">38.21</span>),</span>
+<span id="cb23-6"><a href="making-maps-with-python.html#cb23-6" aria-hidden="true" tabindex="-1"></a>            arrowprops <span class="op">=</span> <span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&#39;</span>))</span>
+<span id="cb23-7"><a href="making-maps-with-python.html#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="making-maps-with-python.html#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;SA2&#39;s of Greater Melbourne&quot;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb23-9"><a href="making-maps-with-python.html#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="making-maps-with-python.html#cb23-10" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">&#39;off&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="making-maps-with-python.html#cb24-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-14-1.png" width="1920" /></p>
+<p>Here’s another example using a shapefile for WA</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="making-maps-with-python.html#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-2"><a href="making-maps-with-python.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Geometry File</span></span>
+<span id="cb25-3"><a href="making-maps-with-python.html#cb25-3" aria-hidden="true" tabindex="-1"></a>WA_shp <span class="op">=</span> gpd.read_file(<span class="st">&#39;data/NOV21_WA_LOC_POLYGON_shp_GDA2020/wa_localities.shp&#39;</span>)    </span>
+<span id="cb25-4"><a href="making-maps-with-python.html#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="making-maps-with-python.html#cb25-5" aria-hidden="true" tabindex="-1"></a>WA_shp.plot(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>), linewidth<span class="op">=</span><span class="fl">0.1</span>, color<span class="op">=</span><span class="st">&#39;green&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;0.9&#39;</span>, legend <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb25-6"><a href="making-maps-with-python.html#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="making-maps-with-python.html#cb25-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Western Australia&quot;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb25-8"><a href="making-maps-with-python.html#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="making-maps-with-python.html#cb25-9" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">&#39;off&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="making-maps-with-python.html#cb26-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-15-3.png" width="1920" /></p>
+</div>
+<div id="geocoding-address-data" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Geocoding address data<a href="making-maps-with-python.html#geocoding-address-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Using Nominatim to find the coordinates of a street address</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="making-maps-with-python.html#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="making-maps-with-python.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
+<span id="cb27-3"><a href="making-maps-with-python.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="making-maps-with-python.html#cb27-4" aria-hidden="true" tabindex="-1"></a>geolocator <span class="op">=</span> Nominatim(user_agent<span class="op">=</span><span class="st">&quot;coverdale&quot;</span>)</span>
+<span id="cb27-5"><a href="making-maps-with-python.html#cb27-5" aria-hidden="true" tabindex="-1"></a>test_location <span class="op">=</span> geolocator.geocode(<span class="st">&quot;150 Collins Street, Melbourne Australia&quot;</span>)</span>
+<span id="cb27-6"><a href="making-maps-with-python.html#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="making-maps-with-python.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_location.address)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="making-maps-with-python.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_location.latitude, test_location.longitude)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="making-maps-with-python.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_location.raw)</span></code></pre></div>
+<p><strong>Using Nominatim to find the street address from a set of coordinates</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="making-maps-with-python.html#cb30-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2"><a href="making-maps-with-python.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
+<span id="cb30-3"><a href="making-maps-with-python.html#cb30-3" aria-hidden="true" tabindex="-1"></a>geolocator <span class="op">=</span> Nominatim(user_agent<span class="op">=</span><span class="st">&quot;coverdale&quot;</span>)</span>
+<span id="cb30-4"><a href="making-maps-with-python.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="making-maps-with-python.html#cb30-5" aria-hidden="true" tabindex="-1"></a>test_location <span class="op">=</span> geolocator.reverse(<span class="st">&quot;-37.81214, 144.96246&quot;</span>)</span>
+<span id="cb30-6"><a href="making-maps-with-python.html#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="making-maps-with-python.html#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_location.address)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="making-maps-with-python.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_location.latitude, test_location.longitude)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="making-maps-with-python.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_location.raw)</span></code></pre></div>
+<p><strong>We can also use <code>geopy</code> to find the distance between two points</strong></p>
+<p>Geopy can calculate geodesic distance between two points using the <a href="https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid">geodesic distance</a> or the <a href="https://en.wikipedia.org/wiki/Great-circle_distance">great-circle distance</a>, with a default of the geodesic distance available as the function geopy.distance.distance.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="making-maps-with-python.html#cb33-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-2"><a href="making-maps-with-python.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Here&#39;s an example usage of the geodesic distance:</span></span>
+<span id="cb33-3"><a href="making-maps-with-python.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.distance <span class="im">import</span> geodesic</span>
+<span id="cb33-4"><a href="making-maps-with-python.html#cb33-4" aria-hidden="true" tabindex="-1"></a>sydney <span class="op">=</span> (<span class="op">-</span><span class="fl">37.81214</span>, <span class="fl">144.96246</span>)</span>
+<span id="cb33-5"><a href="making-maps-with-python.html#cb33-5" aria-hidden="true" tabindex="-1"></a>melbourne <span class="op">=</span> (<span class="op">-</span><span class="fl">33.8688</span>, <span class="fl">151.2093</span>)</span>
+<span id="cb33-6"><a href="making-maps-with-python.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(geodesic(sydney, melbourne).kilometers)</span>
+<span id="cb33-7"><a href="making-maps-with-python.html#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="making-maps-with-python.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Using great-circle distance:</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="making-maps-with-python.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.distance <span class="im">import</span> great_circle</span>
+<span id="cb34-2"><a href="making-maps-with-python.html#cb34-2" aria-hidden="true" tabindex="-1"></a>sydney <span class="op">=</span> (<span class="op">-</span><span class="fl">37.81214</span>, <span class="fl">144.96246</span>)</span>
+<span id="cb34-3"><a href="making-maps-with-python.html#cb34-3" aria-hidden="true" tabindex="-1"></a>melbourne <span class="op">=</span> (<span class="op">-</span><span class="fl">33.8688</span>, <span class="fl">151.2093</span>)</span>
+<span id="cb34-4"><a href="making-maps-with-python.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(great_circle(sydney, melbourne).kilometers)</span></code></pre></div>
+<p>Note we see a slight difference in the km measurement (around 500m) - this is due to the earth not being exactly spherical.</p>
+<p><strong>Geocoding a list of addresses</strong></p>
+<p>hospital_data_clean = hospital_data.dropna()</p>
+<p># Split out the points into latitude and longitude</p>
+<p>hospital_data_clean[[‘lat,’ ‘lon,’ ‘altitude’]] = pd.DataFrame(hospital_data[‘point’].to_list(), index=hospital_data.index)</p>
+<p># View dataframe</p>
+<p>hospital_data_clean.head(5)</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="making-maps-with-python.html#cb35-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-2"><a href="making-maps-with-python.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import necessary modules</span></span>
+<span id="cb35-3"><a href="making-maps-with-python.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopy</span>
+<span id="cb35-4"><a href="making-maps-with-python.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geocoder</span>
+<span id="cb35-5"><a href="making-maps-with-python.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb35-6"><a href="making-maps-with-python.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Point</span>
+<span id="cb35-7"><a href="making-maps-with-python.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopandas.tools <span class="im">import</span> geocode</span>
+<span id="cb35-8"><a href="making-maps-with-python.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
+<span id="cb35-9"><a href="making-maps-with-python.html#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="making-maps-with-python.html#cb35-10" aria-hidden="true" tabindex="-1"></a>geolocator <span class="op">=</span> Nominatim(user_agent<span class="op">=</span><span class="st">&quot;coverdale&quot;</span>)</span>
+<span id="cb35-11"><a href="making-maps-with-python.html#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="making-maps-with-python.html#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.extra.rate_limiter <span class="im">import</span> RateLimiter</span>
+<span id="cb35-13"><a href="making-maps-with-python.html#cb35-13" aria-hidden="true" tabindex="-1"></a>geocode <span class="op">=</span> RateLimiter(geolocator.geocode, min_delay_seconds<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb35-14"><a href="making-maps-with-python.html#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-15"><a href="making-maps-with-python.html#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb35-16"><a href="making-maps-with-python.html#cb35-16" aria-hidden="true" tabindex="-1"></a>hospital_data <span class="op">=</span> pd.read_csv(<span class="st">&quot;data/QLD_public_hospitals.csv&quot;</span>,</span>
+<span id="cb35-17"><a href="making-maps-with-python.html#cb35-17" aria-hidden="true" tabindex="-1"></a>                on_bad_lines<span class="op">=</span><span class="st">&#39;skip&#39;</span>,</span>
+<span id="cb35-18"><a href="making-maps-with-python.html#cb35-18" aria-hidden="true" tabindex="-1"></a>                encoding<span class="op">=</span><span class="st">&#39;unicode_escape&#39;</span>)</span>
+<span id="cb35-19"><a href="making-maps-with-python.html#cb35-19" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb35-20"><a href="making-maps-with-python.html#cb35-20" aria-hidden="true" tabindex="-1"></a>hospital_data.head(<span class="dv">5</span>)</span>
+<span id="cb35-21"><a href="making-maps-with-python.html#cb35-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-22"><a href="making-maps-with-python.html#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the state and country to the data</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="making-maps-with-python.html#cb36-1" aria-hidden="true" tabindex="-1"></a>hospital_data[<span class="st">&#39;Address&#39;</span>] <span class="op">=</span> hospital_data[<span class="st">&#39;Address&#39;</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">&quot;, Queensland, Australia&quot;</span></span>
+<span id="cb36-2"><a href="making-maps-with-python.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="making-maps-with-python.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the location</span></span>
+<span id="cb36-4"><a href="making-maps-with-python.html#cb36-4" aria-hidden="true" tabindex="-1"></a>hospital_data[<span class="st">&#39;location&#39;</span>] <span class="op">=</span> hospital_data[<span class="st">&#39;Address&#39;</span>].<span class="bu">apply</span>(geocode)</span>
+<span id="cb36-5"><a href="making-maps-with-python.html#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="making-maps-with-python.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn the location into a point</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="making-maps-with-python.html#cb37-1" aria-hidden="true" tabindex="-1"></a>hospital_data[<span class="st">&#39;point&#39;</span>] <span class="op">=</span> hospital_data[<span class="st">&#39;location&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> loc: <span class="bu">tuple</span>(loc.point) <span class="cf">if</span> loc <span class="cf">else</span> <span class="va">None</span>)</span>
+<span id="cb37-2"><a href="making-maps-with-python.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="making-maps-with-python.html#cb37-3" aria-hidden="true" tabindex="-1"></a>hospital_data_clean <span class="op">=</span> hospital_data.dropna()</span>
+<span id="cb37-4"><a href="making-maps-with-python.html#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="making-maps-with-python.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split out the points into latitude and longitude</span></span>
+<span id="cb37-6"><a href="making-maps-with-python.html#cb37-6" aria-hidden="true" tabindex="-1"></a>hospital_data_clean[[<span class="st">&#39;lat&#39;</span>, <span class="st">&#39;lon&#39;</span>, <span class="st">&#39;altitude&#39;</span>]] <span class="op">=</span> pd.DataFrame(hospital_data_clean[<span class="st">&#39;point&#39;</span>].to_list(), index<span class="op">=</span>hospital_data_clean.index)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="making-maps-with-python.html#cb38-1" aria-hidden="true" tabindex="-1"></a>geometry <span class="op">=</span> [Point(xy) <span class="cf">for</span> xy <span class="kw">in</span> <span class="bu">zip</span> (hospital_data_clean[<span class="st">&#39;lon&#39;</span>], hospital_data_clean[<span class="st">&#39;lat&#39;</span>])]</span>
+<span id="cb38-2"><a href="making-maps-with-python.html#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="making-maps-with-python.html#cb38-3" aria-hidden="true" tabindex="-1"></a>hospital_geodataframe <span class="op">=</span> gpd.GeoDataFrame(hospital_data_clean,</span>
+<span id="cb38-4"><a href="making-maps-with-python.html#cb38-4" aria-hidden="true" tabindex="-1"></a>                                        crs<span class="op">=</span><span class="st">&quot;EPSG:4326&quot;</span>, </span>
+<span id="cb38-5"><a href="making-maps-with-python.html#cb38-5" aria-hidden="true" tabindex="-1"></a>                                        geometry<span class="op">=</span>geometry)</span>
+<span id="cb38-6"><a href="making-maps-with-python.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="making-maps-with-python.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#hospital_geodataframe.set_crs(epsg=4326, inplace=True)</span></span>
+<span id="cb38-8"><a href="making-maps-with-python.html#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="making-maps-with-python.html#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View dataframe</span></span>
+<span id="cb38-10"><a href="making-maps-with-python.html#cb38-10" aria-hidden="true" tabindex="-1"></a>hospital_geodataframe.head(<span class="dv">5</span>)</span></code></pre></div>
+<p>Let’s now plot these points on a map of Queensland. We’ll also need to load in the shape of Queensland as the ‘base map.’</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="making-maps-with-python.html#cb39-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-2"><a href="making-maps-with-python.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the SHP file</span></span>
+<span id="cb39-3"><a href="making-maps-with-python.html#cb39-3" aria-hidden="true" tabindex="-1"></a>STE_shp <span class="op">=</span> gpd.read_file(<span class="st">&#39;ASGS/STE_2021_AUST_SHP_GDA2020/STE_2021_AUST_GDA2020.shp&#39;</span>)    </span>
+<span id="cb39-4"><a href="making-maps-with-python.html#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="making-maps-with-python.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data using Geopandas</span></span>
+<span id="cb39-6"><a href="making-maps-with-python.html#cb39-6" aria-hidden="true" tabindex="-1"></a>STE_shp.head()</span>
+<span id="cb39-7"><a href="making-maps-with-python.html#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="making-maps-with-python.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the coordinate reference system attached to the shapefile</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="making-maps-with-python.html#cb40-1" aria-hidden="true" tabindex="-1"></a>STE_shp.crs</span>
+<span id="cb40-2"><a href="making-maps-with-python.html#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="making-maps-with-python.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for only Greater Melbourne</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="making-maps-with-python.html#cb41-1" aria-hidden="true" tabindex="-1"></a>STE_shp_QLD <span class="op">=</span> STE_shp[STE_shp[<span class="st">&#39;STE_NAME21&#39;</span>]<span class="op">==</span><span class="st">&#39;Queensland&#39;</span>] </span>
+<span id="cb41-2"><a href="making-maps-with-python.html#cb41-2" aria-hidden="true" tabindex="-1"></a>STE_shp_QLD.head()</span></code></pre></div>
+<p>Now we plot the two layers together</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="making-maps-with-python.html#cb42-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-2"><a href="making-maps-with-python.html#cb42-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb42-3"><a href="making-maps-with-python.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="making-maps-with-python.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Base layer with all the areas for the background</span></span>
+<span id="cb42-5"><a href="making-maps-with-python.html#cb42-5" aria-hidden="true" tabindex="-1"></a>STE_shp_QLD.plot(ax<span class="op">=</span>ax, linewidth<span class="op">=</span><span class="fl">0.1</span>, color<span class="op">=</span><span class="st">&#39;lightgrey&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;0.9&#39;</span>)</span>
+<span id="cb42-6"><a href="making-maps-with-python.html#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="making-maps-with-python.html#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Hospital points</span></span>
+<span id="cb42-8"><a href="making-maps-with-python.html#cb42-8" aria-hidden="true" tabindex="-1"></a>hospital_geodataframe.plot(ax<span class="op">=</span>ax, alpha<span class="op">=</span><span class="dv">1</span>, facecolor<span class="op">=</span><span class="st">&#39;blue&#39;</span>, markersize<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb42-9"><a href="making-maps-with-python.html#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="making-maps-with-python.html#cb42-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Hospitals in Queensland&quot;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb42-11"><a href="making-maps-with-python.html#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="making-maps-with-python.html#cb42-12" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
+<span id="cb42-13"><a href="making-maps-with-python.html#cb42-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-21-5.png" width="1152" /></p>
+</div>
+<div id="open-street-map" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Open Street Map<a href="making-maps-with-python.html#open-street-map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This exercise loosely follows the <a href="https://towardsdatascience.com/creating-beautiful-maps-with-python-6e1aae54c55c">wonderful tutorial created by Carlos Cilleruelo</a>.</p>
+<p>It builds off the OSMnx package that allows us to download spatial data from OpenStreetMap.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="making-maps-with-python.html#cb43-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-2"><a href="making-maps-with-python.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> osmnx <span class="im">as</span> ox</span>
+<span id="cb43-3"><a href="making-maps-with-python.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="making-maps-with-python.html#cb43-4" aria-hidden="true" tabindex="-1"></a>center_point <span class="op">=</span> (<span class="op">-</span><span class="fl">37.81214</span>, <span class="fl">144.96246</span>)</span>
+<span id="cb43-5"><a href="making-maps-with-python.html#cb43-5" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> ox.graph_from_point(center_point, dist<span class="op">=</span><span class="dv">15000</span>, retain_all<span class="op">=</span><span class="va">True</span>, simplify <span class="op">=</span> <span class="va">True</span>, network_type<span class="op">=</span><span class="st">&#39;all&#39;</span>)</span>
+<span id="cb43-6"><a href="making-maps-with-python.html#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="making-maps-with-python.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co">#place = [&quot;Melbourne, Australia&quot;]</span></span>
+<span id="cb43-8"><a href="making-maps-with-python.html#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">#G = ox.graph_from_place(place, retain_all=True, simplify = True, network_type=&#39;all&#39;)</span></span>
+<span id="cb43-9"><a href="making-maps-with-python.html#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="making-maps-with-python.html#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpack the data</span></span>
+<span id="cb43-11"><a href="making-maps-with-python.html#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="making-maps-with-python.html#cb43-12" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> []</span>
+<span id="cb43-13"><a href="making-maps-with-python.html#cb43-13" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> []</span>
+<span id="cb43-14"><a href="making-maps-with-python.html#cb43-14" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> []</span>
+<span id="cb43-15"><a href="making-maps-with-python.html#cb43-15" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb43-16"><a href="making-maps-with-python.html#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> uu, vv, kkey, ddata <span class="kw">in</span> G.edges(keys<span class="op">=</span><span class="va">True</span>, data<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb43-17"><a href="making-maps-with-python.html#cb43-17" aria-hidden="true" tabindex="-1"></a>    u.append(uu)</span>
+<span id="cb43-18"><a href="making-maps-with-python.html#cb43-18" aria-hidden="true" tabindex="-1"></a>    v.append(vv)</span>
+<span id="cb43-19"><a href="making-maps-with-python.html#cb43-19" aria-hidden="true" tabindex="-1"></a>    key.append(kkey)</span>
+<span id="cb43-20"><a href="making-maps-with-python.html#cb43-20" aria-hidden="true" tabindex="-1"></a>    data.append(ddata)  </span>
+<span id="cb43-21"><a href="making-maps-with-python.html#cb43-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb43-22"><a href="making-maps-with-python.html#cb43-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb43-23"><a href="making-maps-with-python.html#cb43-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Lists to store colors and widths </span></span>
+<span id="cb43-24"><a href="making-maps-with-python.html#cb43-24" aria-hidden="true" tabindex="-1"></a>roadColors <span class="op">=</span> []</span>
+<span id="cb43-25"><a href="making-maps-with-python.html#cb43-25" aria-hidden="true" tabindex="-1"></a>roadWidths <span class="op">=</span> []</span>
+<span id="cb43-26"><a href="making-maps-with-python.html#cb43-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-27"><a href="making-maps-with-python.html#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> data:</span>
+<span id="cb43-28"><a href="making-maps-with-python.html#cb43-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&quot;length&quot;</span> <span class="kw">in</span> item.keys():</span>
+<span id="cb43-29"><a href="making-maps-with-python.html#cb43-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&lt;=</span> <span class="dv">100</span>:</span>
+<span id="cb43-30"><a href="making-maps-with-python.html#cb43-30" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb43-31"><a href="making-maps-with-python.html#cb43-31" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#a6a6a6&quot;</span> </span>
+<span id="cb43-32"><a href="making-maps-with-python.html#cb43-32" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb43-33"><a href="making-maps-with-python.html#cb43-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&gt;</span> <span class="dv">100</span> <span class="kw">and</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&lt;=</span> <span class="dv">200</span>:</span>
+<span id="cb43-34"><a href="making-maps-with-python.html#cb43-34" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="fl">0.15</span></span>
+<span id="cb43-35"><a href="making-maps-with-python.html#cb43-35" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#676767&quot;</span></span>
+<span id="cb43-36"><a href="making-maps-with-python.html#cb43-36" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb43-37"><a href="making-maps-with-python.html#cb43-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&gt;</span> <span class="dv">200</span> <span class="kw">and</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&lt;=</span> <span class="dv">400</span>:</span>
+<span id="cb43-38"><a href="making-maps-with-python.html#cb43-38" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="fl">0.25</span></span>
+<span id="cb43-39"><a href="making-maps-with-python.html#cb43-39" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#454545&quot;</span></span>
+<span id="cb43-40"><a href="making-maps-with-python.html#cb43-40" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb43-41"><a href="making-maps-with-python.html#cb43-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&gt;</span> <span class="dv">400</span> <span class="kw">and</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&lt;=</span> <span class="dv">800</span>:</span>
+<span id="cb43-42"><a href="making-maps-with-python.html#cb43-42" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#bdbdbd&quot;</span></span>
+<span id="cb43-43"><a href="making-maps-with-python.html#cb43-43" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="fl">0.35</span></span>
+<span id="cb43-44"><a href="making-maps-with-python.html#cb43-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb43-45"><a href="making-maps-with-python.html#cb43-45" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#d5d5d5&quot;</span></span>
+<span id="cb43-46"><a href="making-maps-with-python.html#cb43-46" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="fl">0.45</span></span>
+<span id="cb43-47"><a href="making-maps-with-python.html#cb43-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-48"><a href="making-maps-with-python.html#cb43-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">&quot;primary&quot;</span> <span class="kw">in</span> item[<span class="st">&quot;highway&quot;</span>]:</span>
+<span id="cb43-49"><a href="making-maps-with-python.html#cb43-49" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb43-50"><a href="making-maps-with-python.html#cb43-50" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#ffff&quot;</span></span>
+<span id="cb43-51"><a href="making-maps-with-python.html#cb43-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb43-52"><a href="making-maps-with-python.html#cb43-52" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">&quot;#a6a6a6&quot;</span></span>
+<span id="cb43-53"><a href="making-maps-with-python.html#cb43-53" aria-hidden="true" tabindex="-1"></a>        linewidth <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb43-54"><a href="making-maps-with-python.html#cb43-54" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb43-55"><a href="making-maps-with-python.html#cb43-55" aria-hidden="true" tabindex="-1"></a>    roadColors.append(color)</span>
+<span id="cb43-56"><a href="making-maps-with-python.html#cb43-56" aria-hidden="true" tabindex="-1"></a>    roadWidths.append(linewidth)    </span>
+<span id="cb43-57"><a href="making-maps-with-python.html#cb43-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb43-58"><a href="making-maps-with-python.html#cb43-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> data:</span>
+<span id="cb43-59"><a href="making-maps-with-python.html#cb43-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&quot;footway&quot;</span> <span class="kw">in</span> item[<span class="st">&quot;highway&quot;</span>]:</span>
+<span id="cb43-60"><a href="making-maps-with-python.html#cb43-60" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">&quot;#ededed&quot;</span></span>
+<span id="cb43-61"><a href="making-maps-with-python.html#cb43-61" aria-hidden="true" tabindex="-1"></a>        linewidth <span class="op">=</span> <span class="fl">0.25</span></span>
+<span id="cb43-62"><a href="making-maps-with-python.html#cb43-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb43-63"><a href="making-maps-with-python.html#cb43-63" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">&quot;#a6a6a6&quot;</span></span>
+<span id="cb43-64"><a href="making-maps-with-python.html#cb43-64" aria-hidden="true" tabindex="-1"></a>        linewidth <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb43-65"><a href="making-maps-with-python.html#cb43-65" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb43-66"><a href="making-maps-with-python.html#cb43-66" aria-hidden="true" tabindex="-1"></a>    roadWidths.append(linewidth)</span>
+<span id="cb43-67"><a href="making-maps-with-python.html#cb43-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb43-68"><a href="making-maps-with-python.html#cb43-68" aria-hidden="true" tabindex="-1"></a><span class="co">#Center of the map  </span></span>
+<span id="cb43-69"><a href="making-maps-with-python.html#cb43-69" aria-hidden="true" tabindex="-1"></a>latitude <span class="op">=</span> <span class="op">-</span><span class="fl">37.81214</span></span>
+<span id="cb43-70"><a href="making-maps-with-python.html#cb43-70" aria-hidden="true" tabindex="-1"></a>longitude <span class="op">=</span> <span class="fl">144.96246</span></span>
+<span id="cb43-71"><a href="making-maps-with-python.html#cb43-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-72"><a href="making-maps-with-python.html#cb43-72" aria-hidden="true" tabindex="-1"></a><span class="co">#Limit borders </span></span>
+<span id="cb43-73"><a href="making-maps-with-python.html#cb43-73" aria-hidden="true" tabindex="-1"></a>north <span class="op">=</span> latitude <span class="op">+</span> <span class="fl">0.15</span></span>
+<span id="cb43-74"><a href="making-maps-with-python.html#cb43-74" aria-hidden="true" tabindex="-1"></a>south <span class="op">=</span> latitude <span class="op">-</span> <span class="fl">0.15</span></span>
+<span id="cb43-75"><a href="making-maps-with-python.html#cb43-75" aria-hidden="true" tabindex="-1"></a>east <span class="op">=</span> longitude <span class="op">+</span> <span class="fl">0.15</span></span>
+<span id="cb43-76"><a href="making-maps-with-python.html#cb43-76" aria-hidden="true" tabindex="-1"></a>west <span class="op">=</span> longitude <span class="op">-</span> <span class="fl">0.15</span></span>
+<span id="cb43-77"><a href="making-maps-with-python.html#cb43-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-78"><a href="making-maps-with-python.html#cb43-78" aria-hidden="true" tabindex="-1"></a>bgcolor <span class="op">=</span> <span class="st">&quot;#061529&quot;</span></span>
+<span id="cb43-79"><a href="making-maps-with-python.html#cb43-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-80"><a href="making-maps-with-python.html#cb43-80" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> ox.plot_graph(G, node_size<span class="op">=</span><span class="dv">0</span>, bbox <span class="op">=</span> (north, south, east, west),</span>
+<span id="cb43-81"><a href="making-maps-with-python.html#cb43-81" aria-hidden="true" tabindex="-1"></a>                        dpi <span class="op">=</span> <span class="dv">300</span>,bgcolor <span class="op">=</span> bgcolor,</span>
+<span id="cb43-82"><a href="making-maps-with-python.html#cb43-82" aria-hidden="true" tabindex="-1"></a>                        save <span class="op">=</span> <span class="va">False</span>, edge_color<span class="op">=</span>roadColors,</span>
+<span id="cb43-83"><a href="making-maps-with-python.html#cb43-83" aria-hidden="true" tabindex="-1"></a>                        edge_linewidth<span class="op">=</span>roadWidths, edge_alpha<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-22-7.png" width="768" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="making-maps-with-python.html#cb44-1" aria-hidden="true" tabindex="-1"></a>fig.tight_layout(pad<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb44-2"><a href="making-maps-with-python.html#cb44-2" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">&quot;madrid.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&#39;tight&#39;</span>, <span class="bu">format</span><span class="op">=</span><span class="st">&quot;png&quot;</span>, </span>
+<span id="cb44-3"><a href="making-maps-with-python.html#cb44-3" aria-hidden="true" tabindex="-1"></a>            facecolor<span class="op">=</span>fig.get_facecolor(), transparent<span class="op">=</span><span class="va">False</span>)    </span>
+<span id="cb44-4"><a href="making-maps-with-python.html#cb44-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb44-5"><a href="making-maps-with-python.html#cb44-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> ox.plot_graph(G, node_size<span class="op">=</span><span class="dv">0</span>,figsize<span class="op">=</span>(<span class="dv">27</span>, <span class="dv">40</span>), </span>
+<span id="cb44-6"><a href="making-maps-with-python.html#cb44-6" aria-hidden="true" tabindex="-1"></a>                        dpi <span class="op">=</span> <span class="dv">300</span>,bgcolor <span class="op">=</span> bgcolor,</span>
+<span id="cb44-7"><a href="making-maps-with-python.html#cb44-7" aria-hidden="true" tabindex="-1"></a>                        save <span class="op">=</span> <span class="va">False</span>, edge_color<span class="op">=</span>roadColors,</span>
+<span id="cb44-8"><a href="making-maps-with-python.html#cb44-8" aria-hidden="true" tabindex="-1"></a>                        edge_linewidth<span class="op">=</span>roadWidths, edge_alpha<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-22-8.png" width="2592" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="making-maps-with-python.html#cb45-1" aria-hidden="true" tabindex="-1"></a>fig.tight_layout(pad<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb45-2"><a href="making-maps-with-python.html#cb45-2" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">&quot;madridPoster.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, <span class="bu">format</span><span class="op">=</span><span class="st">&quot;png&quot;</span>, bbox_inches<span class="op">=</span><span class="st">&#39;tight&#39;</span>,</span>
+<span id="cb45-3"><a href="making-maps-with-python.html#cb45-3" aria-hidden="true" tabindex="-1"></a>            facecolor<span class="op">=</span>fig.get_facecolor(), transparent<span class="op">=</span><span class="va">False</span>)    </span></code></pre></div>
+<p>We can also add a water layer for the map above (and combine them in photoshop or similiar)</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="making-maps-with-python.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb46-2"><a href="making-maps-with-python.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> osmnx <span class="im">as</span> ox</span>
+<span id="cb46-3"><a href="making-maps-with-python.html#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="making-maps-with-python.html#cb46-4" aria-hidden="true" tabindex="-1"></a>center_point <span class="op">=</span> (<span class="op">-</span><span class="fl">37.81214</span>, <span class="fl">144.96246</span>)</span>
+<span id="cb46-5"><a href="making-maps-with-python.html#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="making-maps-with-python.html#cb46-6" aria-hidden="true" tabindex="-1"></a>G1 <span class="op">=</span> ox.graph_from_point(center_point, dist<span class="op">=</span><span class="dv">15000</span>, dist_type<span class="op">=</span><span class="st">&#39;bbox&#39;</span>, network_type<span class="op">=</span><span class="st">&#39;all&#39;</span>, </span>
+<span id="cb46-7"><a href="making-maps-with-python.html#cb46-7" aria-hidden="true" tabindex="-1"></a>                         simplify<span class="op">=</span><span class="va">True</span>, retain_all<span class="op">=</span><span class="va">True</span>, truncate_by_edge<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb46-8"><a href="making-maps-with-python.html#cb46-8" aria-hidden="true" tabindex="-1"></a>                         clean_periphery<span class="op">=</span><span class="va">False</span>, custom_filter<span class="op">=</span><span class="st">&#39;[&quot;natural&quot;~&quot;water&quot;]&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="making-maps-with-python.html#cb47-1" aria-hidden="true" tabindex="-1"></a>G2 <span class="op">=</span> ox.graph_from_point(center_point, dist<span class="op">=</span><span class="dv">15000</span>, dist_type<span class="op">=</span><span class="st">&#39;bbox&#39;</span>, network_type<span class="op">=</span><span class="st">&#39;all&#39;</span>, </span>
+<span id="cb47-2"><a href="making-maps-with-python.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                         simplify<span class="op">=</span><span class="va">True</span>, retain_all<span class="op">=</span><span class="va">True</span>, truncate_by_edge<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb47-3"><a href="making-maps-with-python.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                         clean_periphery<span class="op">=</span><span class="va">False</span>, custom_filter<span class="op">=</span><span class="st">&#39;[&quot;waterway&quot;~&quot;river&quot;]&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="making-maps-with-python.html#cb48-1" aria-hidden="true" tabindex="-1"></a>Gwater <span class="op">=</span> nx.compose(G1, G2)</span>
+<span id="cb48-2"><a href="making-maps-with-python.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="making-maps-with-python.html#cb48-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> []</span>
+<span id="cb48-4"><a href="making-maps-with-python.html#cb48-4" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> []</span>
+<span id="cb48-5"><a href="making-maps-with-python.html#cb48-5" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> []</span>
+<span id="cb48-6"><a href="making-maps-with-python.html#cb48-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb48-7"><a href="making-maps-with-python.html#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> uu, vv, kkey, ddata <span class="kw">in</span> Gwater.edges(keys<span class="op">=</span><span class="va">True</span>, data<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb48-8"><a href="making-maps-with-python.html#cb48-8" aria-hidden="true" tabindex="-1"></a>    u.append(uu)</span>
+<span id="cb48-9"><a href="making-maps-with-python.html#cb48-9" aria-hidden="true" tabindex="-1"></a>    v.append(vv)</span>
+<span id="cb48-10"><a href="making-maps-with-python.html#cb48-10" aria-hidden="true" tabindex="-1"></a>    key.append(kkey)</span>
+<span id="cb48-11"><a href="making-maps-with-python.html#cb48-11" aria-hidden="true" tabindex="-1"></a>    data.append(ddata)    </span>
+<span id="cb48-12"><a href="making-maps-with-python.html#cb48-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-13"><a href="making-maps-with-python.html#cb48-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-14"><a href="making-maps-with-python.html#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="co"># List to store colors</span></span>
+<span id="cb48-15"><a href="making-maps-with-python.html#cb48-15" aria-hidden="true" tabindex="-1"></a>roadColors <span class="op">=</span> []</span>
+<span id="cb48-16"><a href="making-maps-with-python.html#cb48-16" aria-hidden="true" tabindex="-1"></a>roadWidths <span class="op">=</span> []</span>
+<span id="cb48-17"><a href="making-maps-with-python.html#cb48-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-18"><a href="making-maps-with-python.html#cb48-18" aria-hidden="true" tabindex="-1"></a><span class="co"># #72b1b1</span></span>
+<span id="cb48-19"><a href="making-maps-with-python.html#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="co"># #5dc1b9</span></span>
+<span id="cb48-20"><a href="making-maps-with-python.html#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> data:</span>
+<span id="cb48-21"><a href="making-maps-with-python.html#cb48-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&quot;name&quot;</span> <span class="kw">in</span> item.keys():</span>
+<span id="cb48-22"><a href="making-maps-with-python.html#cb48-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> item[<span class="st">&quot;length&quot;</span>] <span class="op">&gt;</span> <span class="dv">400</span>: </span>
+<span id="cb48-23"><a href="making-maps-with-python.html#cb48-23" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#72b1b1&quot;</span></span>
+<span id="cb48-24"><a href="making-maps-with-python.html#cb48-24" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb48-25"><a href="making-maps-with-python.html#cb48-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb48-26"><a href="making-maps-with-python.html#cb48-26" aria-hidden="true" tabindex="-1"></a>            color <span class="op">=</span> <span class="st">&quot;#72b1b1&quot;</span></span>
+<span id="cb48-27"><a href="making-maps-with-python.html#cb48-27" aria-hidden="true" tabindex="-1"></a>            linewidth <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb48-28"><a href="making-maps-with-python.html#cb48-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb48-29"><a href="making-maps-with-python.html#cb48-29" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">&quot;#72b1b1&quot;</span></span>
+<span id="cb48-30"><a href="making-maps-with-python.html#cb48-30" aria-hidden="true" tabindex="-1"></a>        linewidth <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb48-31"><a href="making-maps-with-python.html#cb48-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb48-32"><a href="making-maps-with-python.html#cb48-32" aria-hidden="true" tabindex="-1"></a>    roadColors.append(color)    </span>
+<span id="cb48-33"><a href="making-maps-with-python.html#cb48-33" aria-hidden="true" tabindex="-1"></a>    roadWidths.append(linewidth)</span>
+<span id="cb48-34"><a href="making-maps-with-python.html#cb48-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb48-35"><a href="making-maps-with-python.html#cb48-35" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> ox.plot_graph(Gwater, node_size<span class="op">=</span><span class="dv">0</span>,figsize<span class="op">=</span>(<span class="dv">27</span>, <span class="dv">40</span>), </span>
+<span id="cb48-36"><a href="making-maps-with-python.html#cb48-36" aria-hidden="true" tabindex="-1"></a>                        dpi <span class="op">=</span> <span class="dv">300</span>, save <span class="op">=</span> <span class="va">False</span>, edge_color<span class="op">=</span>roadColors,</span>
+<span id="cb48-37"><a href="making-maps-with-python.html#cb48-37" aria-hidden="true" tabindex="-1"></a>                        edge_linewidth<span class="op">=</span>roadWidths, edge_alpha<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-23-11.png" width="2592" /></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="making-maps-with-python.html#cb49-1" aria-hidden="true" tabindex="-1"></a>fig.tight_layout(pad<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb49-2"><a href="making-maps-with-python.html#cb49-2" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">&quot;water.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, <span class="bu">format</span><span class="op">=</span><span class="st">&quot;png&quot;</span>, bbox_inches<span class="op">=</span><span class="st">&#39;tight&#39;</span>,</span>
+<span id="cb49-3"><a href="making-maps-with-python.html#cb49-3" aria-hidden="true" tabindex="-1"></a>            facecolor<span class="op">=</span>fig.get_facecolor(), transparent<span class="op">=</span><span class="va">True</span>)    </span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="making-beautiful-charts-in-python.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hypothesis-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/charlescoverdale/casualdabbler/edit/master/03-making_maps.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["series.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-# Python cookbook for the casual dabbler
+# Python Cookbook for the Casual Dabbler
 
 *A practical guide for using Python for analysis and visualisation*
 
