@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Regression analysis | Python Cookbook for the Casual Dabbler</title>
+  <meta name="description" content="A quick-start guide for non-experts using python for data analysis." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Regression analysis | Python Cookbook for the Casual Dabbler" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="A quick-start guide for non-experts using python for data analysis." />
+  <meta name="github-repo" content="openscapes/series" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Regression analysis | Python Cookbook for the Casual Dabbler" />
+  
+  <meta name="twitter:description" content="A quick-start guide for non-experts using python for data analysis." />
+  
+
+<meta name="author" content="Charles Coverdale" />
+
+
+<meta name="date" content="2022-04-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="hypothesis-testing.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="lib/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="lib/css/style.css" type="text/css" />
+<link rel="stylesheet" href="lib/css/lesson.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Mini Bookdown Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome<span></span></a></li>
+<li class="chapter" data-level="2" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html"><i class="fa fa-check"></i><b>2</b> Making beautiful charts in Python<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#whats-in-a-chart"><i class="fa fa-check"></i><b>2.1</b> What’s in a chart?<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-python-packages"><i class="fa fa-check"></i><b>2.2</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-and-cleaning-data"><i class="fa fa-check"></i><b>2.3</b> Importing and cleaning data<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#bar-charts"><i class="fa fa-check"></i><b>2.4</b> Bar charts<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#stacked-bar-charts"><i class="fa fa-check"></i><b>2.5</b> Stacked bar charts<span></span></a></li>
+<li class="chapter" data-level="2.6" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#line-charts"><i class="fa fa-check"></i><b>2.6</b> Line charts<span></span></a></li>
+<li class="chapter" data-level="2.7" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#scatter-plot"><i class="fa fa-check"></i><b>2.7</b> Scatter plot<span></span></a></li>
+<li class="chapter" data-level="2.8" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#histogram"><i class="fa fa-check"></i><b>2.8</b> Histogram<span></span></a></li>
+<li class="chapter" data-level="2.9" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#multiple-charts-in-single-plot"><i class="fa fa-check"></i><b>2.9</b> Multiple charts in single plot<span></span></a></li>
+<li class="chapter" data-level="2.10" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#annotating-charts"><i class="fa fa-check"></i><b>2.10</b> Annotating charts<span></span></a></li>
+<li class="chapter" data-level="2.11" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#making-maps-with-python"><i class="fa fa-check"></i><b>2.11</b> Making maps with python<span></span></a></li>
+<li class="chapter" data-level="2.12" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-python-packages-1"><i class="fa fa-check"></i><b>2.12</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="2.13" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#making-simple-maps-with-geopandas"><i class="fa fa-check"></i><b>2.13</b> Making simple maps with geopandas<span></span></a></li>
+<li class="chapter" data-level="2.14" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#geocoding-address-data"><i class="fa fa-check"></i><b>2.14</b> Geocoding address data<span></span></a></li>
+<li class="chapter" data-level="2.15" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#open-street-map"><i class="fa fa-check"></i><b>2.15</b> Open Street Map<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>3</b> Hypothesis testing<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-a-new-module"><i class="fa fa-check"></i><b>3.1</b> Importing a new module<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-python-packages-2"><i class="fa fa-check"></i><b>3.2</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#correlation"><i class="fa fa-check"></i><b>3.3</b> Correlation<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#stationary-tests"><i class="fa fa-check"></i><b>3.4</b> Stationary tests<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#t-test-of-the-sample-mean"><i class="fa fa-check"></i><b>3.5</b> t-test of the sample mean<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-for-normality"><i class="fa fa-check"></i><b>3.6</b> Testing for normality<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression-analysis.html"><a href="regression-analysis.html"><i class="fa fa-check"></i><b>4</b> Regression analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regression-analysis.html"><a href="regression-analysis.html#importing-python-packages-3"><i class="fa fa-check"></i><b>4.1</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="regression-analysis.html"><a href="regression-analysis.html#create-a-model-and-fit-it"><i class="fa fa-check"></i><b>4.2</b> Create a model and fit it<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="regression-analysis.html"><a href="regression-analysis.html#polynomial-regression"><i class="fa fa-check"></i><b>4.3</b> Polynomial regression<span></span></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Cookbook for the Casual Dabbler</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-analysis" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Regression analysis<a href="regression-analysis.html#regression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="importing-python-packages-3" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Importing python packages<a href="regression-analysis.html#importing-python-packages-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="regression-analysis.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb89-2"><a href="regression-analysis.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb89-3"><a href="regression-analysis.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb89-4"><a href="regression-analysis.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb89-5"><a href="regression-analysis.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics</span>
+<span id="cb89-6"><a href="regression-analysis.html#cb89-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-7"><a href="regression-analysis.html#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb89-8"><a href="regression-analysis.html#cb89-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.ticker <span class="im">import</span> EngFormatter, StrMethodFormatter</span></code></pre></div>
+<p>The fundamental data type of NumPy is the array type called numpy.ndarray. The rest of this article uses the term array to refer to instances of the type numpy.ndarray.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="regression-analysis.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_california_housing</span>
+<span id="cb90-2"><a href="regression-analysis.html#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="regression-analysis.html#cb90-3" aria-hidden="true" tabindex="-1"></a>california_housing <span class="op">=</span> fetch_california_housing(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb90-4"><a href="regression-analysis.html#cb90-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-5"><a href="regression-analysis.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(california_housing.DESCR)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="regression-analysis.html#cb91-1" aria-hidden="true" tabindex="-1"></a>california_housing.data.head()</span>
+<span id="cb91-2"><a href="regression-analysis.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="regression-analysis.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Looks good - let&#39;s convert it into a pandas dataframe</span></span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="regression-analysis.html#cb92-1" aria-hidden="true" tabindex="-1"></a>california_housing_df <span class="op">=</span> pd.DataFrame(california_housing.data)</span>
+<span id="cb92-2"><a href="regression-analysis.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="regression-analysis.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(california_housing_df)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="regression-analysis.html#cb93-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-2"><a href="regression-analysis.html#cb93-2" aria-hidden="true" tabindex="-1"></a>california_housing.frame.hist(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>), bins<span class="op">=</span><span class="dv">30</span>, edgecolor<span class="op">=</span><span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="regression-analysis.html#cb94-1" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(hspace<span class="op">=</span><span class="fl">0.7</span>, wspace<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb94-2"><a href="regression-analysis.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="regression-analysis.html#cb94-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-35-1.png" width="1152" /></p>
+</div>
+<div id="create-a-model-and-fit-it" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Create a model and fit it<a href="regression-analysis.html#create-a-model-and-fit-it" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The next step is to create the regression model as an instance of LinearRegression and fit it with .fit().</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="regression-analysis.html#cb95-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-2"><a href="regression-analysis.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
+<span id="cb95-3"><a href="regression-analysis.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb95-4"><a href="regression-analysis.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> linear_model</span>
+<span id="cb95-5"><a href="regression-analysis.html#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="regression-analysis.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose our variables of interest</span></span>
+<span id="cb95-7"><a href="regression-analysis.html#cb95-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> california_housing_df[[<span class="st">&#39;HouseAge&#39;</span>]]</span>
+<span id="cb95-8"><a href="regression-analysis.html#cb95-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> california_housing_df[[<span class="st">&#39;MedInc&#39;</span>]]</span>
+<span id="cb95-9"><a href="regression-analysis.html#cb95-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-10"><a href="regression-analysis.html#cb95-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a model</span></span>
+<span id="cb95-11"><a href="regression-analysis.html#cb95-11" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression().fit(x, y)</span>
+<span id="cb95-12"><a href="regression-analysis.html#cb95-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-13"><a href="regression-analysis.html#cb95-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyse the model fit </span></span>
+<span id="cb95-14"><a href="regression-analysis.html#cb95-14" aria-hidden="true" tabindex="-1"></a>r_sq <span class="op">=</span> model.score(x, y)</span>
+<span id="cb95-15"><a href="regression-analysis.html#cb95-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;coefficient of determination:&#39;</span>, r_sq)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="regression-analysis.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;intercept:&#39;</span>, model.intercept_)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="regression-analysis.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;slope:&#39;</span>, model.coef_)</span></code></pre></div>
+</div>
+<div id="polynomial-regression" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Polynomial regression<a href="regression-analysis.html#polynomial-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can fit different order polynomials by defining the relevant polynomial functions.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="regression-analysis.html#cb98-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-2"><a href="regression-analysis.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in relevant packages</span></span>
+<span id="cb98-3"><a href="regression-analysis.html#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> arange</span>
+<span id="cb98-4"><a href="regression-analysis.html#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span>
+<span id="cb98-5"><a href="regression-analysis.html#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
+<span id="cb98-6"><a href="regression-analysis.html#cb98-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot</span>
+<span id="cb98-7"><a href="regression-analysis.html#cb98-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb98-8"><a href="regression-analysis.html#cb98-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the true objective function for a linear estimation</span></span>
+<span id="cb98-9"><a href="regression-analysis.html#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(x, a, b):</span>
+<span id="cb98-10"><a href="regression-analysis.html#cb98-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> x <span class="op">+</span> b</span>
+<span id="cb98-11"><a href="regression-analysis.html#cb98-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb98-12"><a href="regression-analysis.html#cb98-12" aria-hidden="true" tabindex="-1"></a><span class="co"># load the dataset</span></span>
+<span id="cb98-13"><a href="regression-analysis.html#cb98-13" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/jbrownlee/Datasets/master/longley.csv&#39;</span></span>
+<span id="cb98-14"><a href="regression-analysis.html#cb98-14" aria-hidden="true" tabindex="-1"></a>dataframe <span class="op">=</span> read_csv(url, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb98-15"><a href="regression-analysis.html#cb98-15" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> dataframe.values</span>
+<span id="cb98-16"><a href="regression-analysis.html#cb98-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-17"><a href="regression-analysis.html#cb98-17" aria-hidden="true" tabindex="-1"></a><span class="co"># choose the input and output variables</span></span>
+<span id="cb98-18"><a href="regression-analysis.html#cb98-18" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> data[:, <span class="dv">4</span>], data[:, <span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb98-19"><a href="regression-analysis.html#cb98-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-20"><a href="regression-analysis.html#cb98-20" aria-hidden="true" tabindex="-1"></a><span class="co"># curve fit</span></span>
+<span id="cb98-21"><a href="regression-analysis.html#cb98-21" aria-hidden="true" tabindex="-1"></a>popt, _ <span class="op">=</span> curve_fit(objective, x, y)</span>
+<span id="cb98-22"><a href="regression-analysis.html#cb98-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-23"><a href="regression-analysis.html#cb98-23" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize the parameter values</span></span>
+<span id="cb98-24"><a href="regression-analysis.html#cb98-24" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> popt</span>
+<span id="cb98-25"><a href="regression-analysis.html#cb98-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;y = </span><span class="sc">%.5f</span><span class="st"> * x + </span><span class="sc">%.5f</span><span class="st">&#39;</span> <span class="op">%</span> (a, b))</span>
+<span id="cb98-26"><a href="regression-analysis.html#cb98-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-27"><a href="regression-analysis.html#cb98-27" aria-hidden="true" tabindex="-1"></a><span class="co"># plot input vs output</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb99-1"><a href="regression-analysis.html#cb99-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y, c <span class="op">=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb99-2"><a href="regression-analysis.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="regression-analysis.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="co"># define a sequence of inputs between the smallest and largest known inputs</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="regression-analysis.html#cb100-1" aria-hidden="true" tabindex="-1"></a>x_line <span class="op">=</span> arange(<span class="bu">min</span>(x), <span class="bu">max</span>(x), <span class="dv">1</span>)</span>
+<span id="cb100-2"><a href="regression-analysis.html#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="regression-analysis.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the output for the range</span></span>
+<span id="cb100-4"><a href="regression-analysis.html#cb100-4" aria-hidden="true" tabindex="-1"></a>y_line <span class="op">=</span> objective(x_line, a, b)</span>
+<span id="cb100-5"><a href="regression-analysis.html#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-6"><a href="regression-analysis.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create a line plot for the mapping function</span></span>
+<span id="cb100-7"><a href="regression-analysis.html#cb100-7" aria-hidden="true" tabindex="-1"></a>plt.plot(x_line, y_line,</span>
+<span id="cb100-8"><a href="regression-analysis.html#cb100-8" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">&#39;Polynomial&#39;</span>, </span>
+<span id="cb100-9"><a href="regression-analysis.html#cb100-9" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">&#39;purple&#39;</span>, </span>
+<span id="cb100-10"><a href="regression-analysis.html#cb100-10" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="dv">1</span>, </span>
+<span id="cb100-11"><a href="regression-analysis.html#cb100-11" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="fl">1.2</span>,</span>
+<span id="cb100-12"><a href="regression-analysis.html#cb100-12" aria-hidden="true" tabindex="-1"></a>        linestyle<span class="op">=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb101-1"><a href="regression-analysis.html#cb101-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Using a linear model to approximate data&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="regression-analysis.html#cb102-1" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb103-1"><a href="regression-analysis.html#cb103-1" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb104-1"><a href="regression-analysis.html#cb104-1" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;top&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb104-2"><a href="regression-analysis.html#cb104-2" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;bottom&#39;</span>].set_visible(<span class="va">True</span>)</span>
+<span id="cb104-3"><a href="regression-analysis.html#cb104-3" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;right&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb104-4"><a href="regression-analysis.html#cb104-4" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;left&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb104-5"><a href="regression-analysis.html#cb104-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-6"><a href="regression-analysis.html#cb104-6" aria-hidden="true" tabindex="-1"></a>plt.tick_params(</span>
+<span id="cb104-7"><a href="regression-analysis.html#cb104-7" aria-hidden="true" tabindex="-1"></a>    axis<span class="op">=</span><span class="st">&#39;x&#39;</span>,          <span class="co"># changes apply to the x-axis</span></span>
+<span id="cb104-8"><a href="regression-analysis.html#cb104-8" aria-hidden="true" tabindex="-1"></a>    which<span class="op">=</span><span class="st">&#39;both&#39;</span>,      <span class="co"># both major and minor ticks are affected</span></span>
+<span id="cb104-9"><a href="regression-analysis.html#cb104-9" aria-hidden="true" tabindex="-1"></a>    bottom<span class="op">=</span><span class="va">False</span>,      <span class="co"># ticks along the bottom edge are off</span></span>
+<span id="cb104-10"><a href="regression-analysis.html#cb104-10" aria-hidden="true" tabindex="-1"></a>    top<span class="op">=</span><span class="va">False</span>,         <span class="co"># ticks along the top edge are off</span></span>
+<span id="cb104-11"><a href="regression-analysis.html#cb104-11" aria-hidden="true" tabindex="-1"></a>    labelbottom<span class="op">=</span><span class="va">True</span>)  <span class="co"># labels along the bottom edge are off</span></span>
+<span id="cb104-12"><a href="regression-analysis.html#cb104-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb104-13"><a href="regression-analysis.html#cb104-13" aria-hidden="true" tabindex="-1"></a>plt.tick_params(</span>
+<span id="cb104-14"><a href="regression-analysis.html#cb104-14" aria-hidden="true" tabindex="-1"></a>    axis<span class="op">=</span><span class="st">&#39;y&#39;</span>,          <span class="co"># changes apply to the y-axis</span></span>
+<span id="cb104-15"><a href="regression-analysis.html#cb104-15" aria-hidden="true" tabindex="-1"></a>    which<span class="op">=</span><span class="st">&#39;both&#39;</span>,      <span class="co"># both major and minor ticks are affected</span></span>
+<span id="cb104-16"><a href="regression-analysis.html#cb104-16" aria-hidden="true" tabindex="-1"></a>    left<span class="op">=</span><span class="va">False</span>,      <span class="co"># ticks along the bottom edge are off</span></span>
+<span id="cb104-17"><a href="regression-analysis.html#cb104-17" aria-hidden="true" tabindex="-1"></a>    right<span class="op">=</span><span class="va">False</span>,         <span class="co"># ticks along the top edge are off</span></span>
+<span id="cb104-18"><a href="regression-analysis.html#cb104-18" aria-hidden="true" tabindex="-1"></a>    labelleft<span class="op">=</span><span class="va">True</span>)  <span class="co"># labels along the bottom edge are off    </span></span>
+<span id="cb104-19"><a href="regression-analysis.html#cb104-19" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb104-20"><a href="regression-analysis.html#cb104-20" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">False</span>)</span>
+<span id="cb104-21"><a href="regression-analysis.html#cb104-21" aria-hidden="true" tabindex="-1"></a>plt.gca().yaxis.grid(<span class="va">True</span>)</span>
+<span id="cb104-22"><a href="regression-analysis.html#cb104-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-23"><a href="regression-analysis.html#cb104-23" aria-hidden="true" tabindex="-1"></a>plt.legend(fancybox<span class="op">=</span><span class="va">False</span>, framealpha<span class="op">=</span><span class="dv">1</span>, shadow<span class="op">=</span><span class="va">False</span>, borderpad<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb105-1"><a href="regression-analysis.html#cb105-1" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">&#39;linear_model_chart.png&#39;</span>,dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">&#39;tight&#39;</span>)</span>
+<span id="cb105-2"><a href="regression-analysis.html#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="regression-analysis.html#cb105-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-37-3.png" width="1152" /></p>
+<p>Now let’s try a polynomial model</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="regression-analysis.html#cb106-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-2"><a href="regression-analysis.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a second degree polynomial to the economic data</span></span>
+<span id="cb106-3"><a href="regression-analysis.html#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> arange</span>
+<span id="cb106-4"><a href="regression-analysis.html#cb106-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span>
+<span id="cb106-5"><a href="regression-analysis.html#cb106-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
+<span id="cb106-6"><a href="regression-analysis.html#cb106-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot</span>
+<span id="cb106-7"><a href="regression-analysis.html#cb106-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb106-8"><a href="regression-analysis.html#cb106-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the true objective function</span></span>
+<span id="cb106-9"><a href="regression-analysis.html#cb106-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(x, a, b, c):</span>
+<span id="cb106-10"><a href="regression-analysis.html#cb106-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> x <span class="op">+</span> b <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> c</span>
+<span id="cb106-11"><a href="regression-analysis.html#cb106-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb106-12"><a href="regression-analysis.html#cb106-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb106-13"><a href="regression-analysis.html#cb106-13" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/jbrownlee/Datasets/master/longley.csv&#39;</span></span>
+<span id="cb106-14"><a href="regression-analysis.html#cb106-14" aria-hidden="true" tabindex="-1"></a>dataframe <span class="op">=</span> read_csv(url, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb106-15"><a href="regression-analysis.html#cb106-15" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> dataframe.values</span>
+<span id="cb106-16"><a href="regression-analysis.html#cb106-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-17"><a href="regression-analysis.html#cb106-17" aria-hidden="true" tabindex="-1"></a><span class="co"># choose the input and output variables</span></span>
+<span id="cb106-18"><a href="regression-analysis.html#cb106-18" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> data[:, <span class="dv">4</span>], data[:, <span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb106-19"><a href="regression-analysis.html#cb106-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-20"><a href="regression-analysis.html#cb106-20" aria-hidden="true" tabindex="-1"></a><span class="co"># curve fit</span></span>
+<span id="cb106-21"><a href="regression-analysis.html#cb106-21" aria-hidden="true" tabindex="-1"></a>popt, _ <span class="op">=</span> curve_fit(objective, x, y)</span>
+<span id="cb106-22"><a href="regression-analysis.html#cb106-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-23"><a href="regression-analysis.html#cb106-23" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize the parameter values</span></span>
+<span id="cb106-24"><a href="regression-analysis.html#cb106-24" aria-hidden="true" tabindex="-1"></a>a, b, c <span class="op">=</span> popt</span>
+<span id="cb106-25"><a href="regression-analysis.html#cb106-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;y = </span><span class="sc">%.5f</span><span class="st"> * x + </span><span class="sc">%.5f</span><span class="st"> * x^2 + </span><span class="sc">%.5f</span><span class="st">&#39;</span> <span class="op">%</span> (a, b, c))</span>
+<span id="cb106-26"><a href="regression-analysis.html#cb106-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-27"><a href="regression-analysis.html#cb106-27" aria-hidden="true" tabindex="-1"></a><span class="co"># plot input vs output</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb107-1"><a href="regression-analysis.html#cb107-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y, c <span class="op">=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb107-2"><a href="regression-analysis.html#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="regression-analysis.html#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="co"># define a sequence of inputs between the smallest and largest known inputs</span></span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="regression-analysis.html#cb108-1" aria-hidden="true" tabindex="-1"></a>x_line <span class="op">=</span> arange(<span class="bu">min</span>(x), <span class="bu">max</span>(x), <span class="dv">1</span>)</span>
+<span id="cb108-2"><a href="regression-analysis.html#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-3"><a href="regression-analysis.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the output for the range</span></span>
+<span id="cb108-4"><a href="regression-analysis.html#cb108-4" aria-hidden="true" tabindex="-1"></a>y_line <span class="op">=</span> objective(x_line, a, b, c)</span>
+<span id="cb108-5"><a href="regression-analysis.html#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-6"><a href="regression-analysis.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create a line plot for the mapping function</span></span>
+<span id="cb108-7"><a href="regression-analysis.html#cb108-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create a line plot for the mapping function</span></span>
+<span id="cb108-8"><a href="regression-analysis.html#cb108-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x_line, y_line,</span>
+<span id="cb108-9"><a href="regression-analysis.html#cb108-9" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">&#39;Polynomial&#39;</span>, </span>
+<span id="cb108-10"><a href="regression-analysis.html#cb108-10" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">&#39;purple&#39;</span>, </span>
+<span id="cb108-11"><a href="regression-analysis.html#cb108-11" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="dv">1</span>, </span>
+<span id="cb108-12"><a href="regression-analysis.html#cb108-12" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="fl">1.2</span>,</span>
+<span id="cb108-13"><a href="regression-analysis.html#cb108-13" aria-hidden="true" tabindex="-1"></a>        linestyle<span class="op">=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb109-1"><a href="regression-analysis.html#cb109-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Using a polynomial model to approximate data&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="regression-analysis.html#cb110-1" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="regression-analysis.html#cb111-1" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="regression-analysis.html#cb112-1" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;top&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb112-2"><a href="regression-analysis.html#cb112-2" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;bottom&#39;</span>].set_visible(<span class="va">True</span>)</span>
+<span id="cb112-3"><a href="regression-analysis.html#cb112-3" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;right&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb112-4"><a href="regression-analysis.html#cb112-4" aria-hidden="true" tabindex="-1"></a>plt.gca().spines[<span class="st">&#39;left&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb112-5"><a href="regression-analysis.html#cb112-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-6"><a href="regression-analysis.html#cb112-6" aria-hidden="true" tabindex="-1"></a>plt.tick_params(</span>
+<span id="cb112-7"><a href="regression-analysis.html#cb112-7" aria-hidden="true" tabindex="-1"></a>    axis<span class="op">=</span><span class="st">&#39;x&#39;</span>,          <span class="co"># changes apply to the x-axis</span></span>
+<span id="cb112-8"><a href="regression-analysis.html#cb112-8" aria-hidden="true" tabindex="-1"></a>    which<span class="op">=</span><span class="st">&#39;both&#39;</span>,      <span class="co"># both major and minor ticks are affected</span></span>
+<span id="cb112-9"><a href="regression-analysis.html#cb112-9" aria-hidden="true" tabindex="-1"></a>    bottom<span class="op">=</span><span class="va">False</span>,      <span class="co"># ticks along the bottom edge are off</span></span>
+<span id="cb112-10"><a href="regression-analysis.html#cb112-10" aria-hidden="true" tabindex="-1"></a>    top<span class="op">=</span><span class="va">False</span>,         <span class="co"># ticks along the top edge are off</span></span>
+<span id="cb112-11"><a href="regression-analysis.html#cb112-11" aria-hidden="true" tabindex="-1"></a>    labelbottom<span class="op">=</span><span class="va">True</span>)  <span class="co"># labels along the bottom edge are off</span></span>
+<span id="cb112-12"><a href="regression-analysis.html#cb112-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb112-13"><a href="regression-analysis.html#cb112-13" aria-hidden="true" tabindex="-1"></a>plt.tick_params(</span>
+<span id="cb112-14"><a href="regression-analysis.html#cb112-14" aria-hidden="true" tabindex="-1"></a>    axis<span class="op">=</span><span class="st">&#39;y&#39;</span>,          <span class="co"># changes apply to the y-axis</span></span>
+<span id="cb112-15"><a href="regression-analysis.html#cb112-15" aria-hidden="true" tabindex="-1"></a>    which<span class="op">=</span><span class="st">&#39;both&#39;</span>,      <span class="co"># both major and minor ticks are affected</span></span>
+<span id="cb112-16"><a href="regression-analysis.html#cb112-16" aria-hidden="true" tabindex="-1"></a>    left<span class="op">=</span><span class="va">False</span>,      <span class="co"># ticks along the bottom edge are off</span></span>
+<span id="cb112-17"><a href="regression-analysis.html#cb112-17" aria-hidden="true" tabindex="-1"></a>    right<span class="op">=</span><span class="va">False</span>,         <span class="co"># ticks along the top edge are off</span></span>
+<span id="cb112-18"><a href="regression-analysis.html#cb112-18" aria-hidden="true" tabindex="-1"></a>    labelleft<span class="op">=</span><span class="va">True</span>)  <span class="co"># labels along the bottom edge are off    </span></span>
+<span id="cb112-19"><a href="regression-analysis.html#cb112-19" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb112-20"><a href="regression-analysis.html#cb112-20" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">False</span>)</span>
+<span id="cb112-21"><a href="regression-analysis.html#cb112-21" aria-hidden="true" tabindex="-1"></a>plt.gca().yaxis.grid(<span class="va">True</span>)</span>
+<span id="cb112-22"><a href="regression-analysis.html#cb112-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-23"><a href="regression-analysis.html#cb112-23" aria-hidden="true" tabindex="-1"></a>plt.legend(fancybox<span class="op">=</span><span class="va">False</span>, framealpha<span class="op">=</span><span class="dv">1</span>, shadow<span class="op">=</span><span class="va">False</span>, borderpad<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="regression-analysis.html#cb113-1" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">&#39;linear_model_chart.png&#39;</span>,dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">&#39;tight&#39;</span>)</span>
+<span id="cb113-2"><a href="regression-analysis.html#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-3"><a href="regression-analysis.html#cb113-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-38-5.png" width="1152" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="hypothesis-testing.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jules32/bookdown-tutorial/edit/master/05-regression_analysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["series.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

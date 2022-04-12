@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Hypothesis testing | Python Cookbook for the Casual Dabbler</title>
+  <meta name="description" content="A quick-start guide for non-experts using python for data analysis." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Hypothesis testing | Python Cookbook for the Casual Dabbler" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="A quick-start guide for non-experts using python for data analysis." />
+  <meta name="github-repo" content="openscapes/series" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Hypothesis testing | Python Cookbook for the Casual Dabbler" />
+  
+  <meta name="twitter:description" content="A quick-start guide for non-experts using python for data analysis." />
+  
+
+<meta name="author" content="Charles Coverdale" />
+
+
+<meta name="date" content="2022-04-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="making-beautiful-charts-in-python.html"/>
+<link rel="next" href="regression-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="lib/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="lib/css/style.css" type="text/css" />
+<link rel="stylesheet" href="lib/css/lesson.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Mini Bookdown Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome<span></span></a></li>
+<li class="chapter" data-level="2" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html"><i class="fa fa-check"></i><b>2</b> Making beautiful charts in Python<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#whats-in-a-chart"><i class="fa fa-check"></i><b>2.1</b> What’s in a chart?<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-python-packages"><i class="fa fa-check"></i><b>2.2</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-and-cleaning-data"><i class="fa fa-check"></i><b>2.3</b> Importing and cleaning data<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#bar-charts"><i class="fa fa-check"></i><b>2.4</b> Bar charts<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#stacked-bar-charts"><i class="fa fa-check"></i><b>2.5</b> Stacked bar charts<span></span></a></li>
+<li class="chapter" data-level="2.6" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#line-charts"><i class="fa fa-check"></i><b>2.6</b> Line charts<span></span></a></li>
+<li class="chapter" data-level="2.7" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#scatter-plot"><i class="fa fa-check"></i><b>2.7</b> Scatter plot<span></span></a></li>
+<li class="chapter" data-level="2.8" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#histogram"><i class="fa fa-check"></i><b>2.8</b> Histogram<span></span></a></li>
+<li class="chapter" data-level="2.9" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#multiple-charts-in-single-plot"><i class="fa fa-check"></i><b>2.9</b> Multiple charts in single plot<span></span></a></li>
+<li class="chapter" data-level="2.10" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#annotating-charts"><i class="fa fa-check"></i><b>2.10</b> Annotating charts<span></span></a></li>
+<li class="chapter" data-level="2.11" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#making-maps-with-python"><i class="fa fa-check"></i><b>2.11</b> Making maps with python<span></span></a></li>
+<li class="chapter" data-level="2.12" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#importing-python-packages-1"><i class="fa fa-check"></i><b>2.12</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="2.13" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#making-simple-maps-with-geopandas"><i class="fa fa-check"></i><b>2.13</b> Making simple maps with geopandas<span></span></a></li>
+<li class="chapter" data-level="2.14" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#geocoding-address-data"><i class="fa fa-check"></i><b>2.14</b> Geocoding address data<span></span></a></li>
+<li class="chapter" data-level="2.15" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#open-street-map"><i class="fa fa-check"></i><b>2.15</b> Open Street Map<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>3</b> Hypothesis testing<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-a-new-module"><i class="fa fa-check"></i><b>3.1</b> Importing a new module<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-python-packages-2"><i class="fa fa-check"></i><b>3.2</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#correlation"><i class="fa fa-check"></i><b>3.3</b> Correlation<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#stationary-tests"><i class="fa fa-check"></i><b>3.4</b> Stationary tests<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#t-test-of-the-sample-mean"><i class="fa fa-check"></i><b>3.5</b> t-test of the sample mean<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-for-normality"><i class="fa fa-check"></i><b>3.6</b> Testing for normality<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression-analysis.html"><a href="regression-analysis.html"><i class="fa fa-check"></i><b>4</b> Regression analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regression-analysis.html"><a href="regression-analysis.html#importing-python-packages-3"><i class="fa fa-check"></i><b>4.1</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="regression-analysis.html"><a href="regression-analysis.html#create-a-model-and-fit-it"><i class="fa fa-check"></i><b>4.2</b> Create a model and fit it<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="regression-analysis.html"><a href="regression-analysis.html#polynomial-regression"><i class="fa fa-check"></i><b>4.3</b> Polynomial regression<span></span></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Python Cookbook for the Casual Dabbler</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="hypothesis-testing" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Hypothesis testing<a href="hypothesis-testing.html#hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="importing-a-new-module" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Importing a new module<a href="hypothesis-testing.html#importing-a-new-module" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="hypothesis-testing.html#cb69-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-2"><a href="hypothesis-testing.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co">## *Should not be needed* </span></span>
+<span id="cb69-3"><a href="hypothesis-testing.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use conda install *package_name* to install a new module (in terminal)</span></span>
+<span id="cb69-4"><a href="hypothesis-testing.html#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="hypothesis-testing.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use reticulate::py_install(&quot;package_name&quot;) to load in that specific package to the R Studio environment</span></span>
+<span id="cb69-6"><a href="hypothesis-testing.html#cb69-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-7"><a href="hypothesis-testing.html#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Then use import &quot;package_name&quot; to import the package into the relevant chunk</span></span></code></pre></div>
+</div>
+<div id="importing-python-packages-2" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Importing python packages<a href="hypothesis-testing.html#importing-python-packages-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="hypothesis-testing.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb70-2"><a href="hypothesis-testing.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb70-3"><a href="hypothesis-testing.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb70-4"><a href="hypothesis-testing.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb70-5"><a href="hypothesis-testing.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics</span>
+<span id="cb70-6"><a href="hypothesis-testing.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb70-7"><a href="hypothesis-testing.html#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="hypothesis-testing.html#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb70-9"><a href="hypothesis-testing.html#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.ticker <span class="im">import</span> EngFormatter, StrMethodFormatter</span></code></pre></div>
+</div>
+<div id="correlation" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Correlation<a href="hypothesis-testing.html#correlation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pearson’s Correlation Coefficient Tests whether two samples have a linear relationship.</p>
+<p><strong>Assumptions</strong></p>
+<ul>
+<li><p>Observations in each sample are independent and identically distributed (iid).</p></li>
+<li><p>Observations in each sample are normally distributed.</p></li>
+<li><p>Observations in each sample have the same variance.</p></li>
+</ul>
+<p><strong>Interpretation</strong></p>
+<ul>
+<li><p>H0: the two samples are independent.</p></li>
+<li><p>H1: there is a dependency between the samples.</p></li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="hypothesis-testing.html#cb71-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-2"><a href="hypothesis-testing.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of the Pearson&#39;s Correlation test</span></span>
+<span id="cb71-3"><a href="hypothesis-testing.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr</span>
+<span id="cb71-4"><a href="hypothesis-testing.html#cb71-4" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> [<span class="fl">0.873</span>, <span class="fl">2.817</span>, <span class="fl">0.121</span>, <span class="op">-</span><span class="fl">0.945</span>, <span class="op">-</span><span class="fl">0.055</span>, <span class="op">-</span><span class="fl">1.436</span>, <span class="fl">0.360</span>, <span class="op">-</span><span class="fl">1.478</span>, <span class="op">-</span><span class="fl">1.637</span>, <span class="op">-</span><span class="fl">1.869</span>]</span>
+<span id="cb71-5"><a href="hypothesis-testing.html#cb71-5" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> [<span class="fl">0.353</span>, <span class="fl">3.517</span>, <span class="fl">0.125</span>, <span class="op">-</span><span class="fl">7.545</span>, <span class="op">-</span><span class="fl">0.555</span>, <span class="op">-</span><span class="fl">1.536</span>, <span class="fl">3.350</span>, <span class="op">-</span><span class="fl">1.578</span>, <span class="op">-</span><span class="fl">3.537</span>, <span class="op">-</span><span class="fl">1.579</span>]</span>
+<span id="cb71-6"><a href="hypothesis-testing.html#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-7"><a href="hypothesis-testing.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test</span></span>
+<span id="cb71-8"><a href="hypothesis-testing.html#cb71-8" aria-hidden="true" tabindex="-1"></a>stat, p <span class="op">=</span> pearsonr(data1, data2)</span>
+<span id="cb71-9"><a href="hypothesis-testing.html#cb71-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-10"><a href="hypothesis-testing.html#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;stat=</span><span class="sc">%.3f</span><span class="st">, p=</span><span class="sc">%.3f</span><span class="st">&#39;</span> <span class="op">%</span> (stat, p))</span></code></pre></div>
+<pre><code>## stat=0.688, p=0.028</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="hypothesis-testing.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb73-2"><a href="hypothesis-testing.html#cb73-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;Datasets are not correlated&#39;</span>)</span>
+<span id="cb73-3"><a href="hypothesis-testing.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb73-4"><a href="hypothesis-testing.html#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;Datasets are correlated&#39;</span>)</span></code></pre></div>
+<pre><code>## Datasets are correlated</code></pre>
+</div>
+<div id="stationary-tests" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Stationary tests<a href="hypothesis-testing.html#stationary-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Augmented Dickey-Fuller Unit Root Test: This tests whether a time series has a unit root, e.g. has a trend or more generally is autoregressive.</p>
+<p>Assumptions</p>
+<ul>
+<li>Observations in are temporally ordered.</li>
+</ul>
+<p>Interpretation</p>
+<ul>
+<li><p>H0: a unit root is present (series is non-stationary).</p></li>
+<li><p>H1: a unit root is not present (series is stationary).</p></li>
+</ul>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="hypothesis-testing.html#cb75-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-2"><a href="hypothesis-testing.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of the Augmented Dickey-Fuller unit root test</span></span>
+<span id="cb75-3"><a href="hypothesis-testing.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
+<span id="cb75-4"><a href="hypothesis-testing.html#cb75-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb75-5"><a href="hypothesis-testing.html#cb75-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-6"><a href="hypothesis-testing.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test</span></span>
+<span id="cb75-7"><a href="hypothesis-testing.html#cb75-7" aria-hidden="true" tabindex="-1"></a>stat, p, lags, obs, crit, t <span class="op">=</span> adfuller(data)</span>
+<span id="cb75-8"><a href="hypothesis-testing.html#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-9"><a href="hypothesis-testing.html#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;stat=</span><span class="sc">%.3f</span><span class="st">, p=</span><span class="sc">%.3f</span><span class="st">&#39;</span> <span class="op">%</span> (stat, p))</span></code></pre></div>
+<pre><code>## stat=2.430, p=0.999</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="hypothesis-testing.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb77-2"><a href="hypothesis-testing.html#cb77-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;Series is not stationary&#39;</span>)</span>
+<span id="cb77-3"><a href="hypothesis-testing.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb77-4"><a href="hypothesis-testing.html#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;Series is stationary&#39;</span>)</span></code></pre></div>
+<pre><code>## Series is not stationary</code></pre>
+</div>
+<div id="t-test-of-the-sample-mean" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> t-test of the sample mean<a href="hypothesis-testing.html#t-test-of-the-sample-mean" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tests whether the means of two independent samples are significantly different.</p>
+<p><strong>Assumptions</strong></p>
+<ul>
+<li><p>Observations in each sample are independent and identically distributed (iid).</p></li>
+<li><p>Observations in each sample are normally distributed.</p></li>
+<li><p>Observations in each sample have the same variance.</p></li>
+</ul>
+<p><strong>Interpretation</strong></p>
+<ul>
+<li><p>H0: the means of the samples are equal.</p></li>
+<li><p>H1: the means of the samples are unequal.</p></li>
+</ul>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="hypothesis-testing.html#cb79-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-2"><a href="hypothesis-testing.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of the Student&#39;s t-test</span></span>
+<span id="cb79-3"><a href="hypothesis-testing.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> ttest_ind</span>
+<span id="cb79-4"><a href="hypothesis-testing.html#cb79-4" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> [<span class="fl">0.873</span>, <span class="fl">2.817</span>, <span class="fl">0.121</span>, <span class="op">-</span><span class="fl">0.945</span>, <span class="op">-</span><span class="fl">0.055</span>, <span class="op">-</span><span class="fl">1.436</span>, <span class="fl">0.360</span>, <span class="op">-</span><span class="fl">1.478</span>, <span class="op">-</span><span class="fl">1.637</span>, <span class="op">-</span><span class="fl">1.869</span>]</span>
+<span id="cb79-5"><a href="hypothesis-testing.html#cb79-5" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> [<span class="fl">1.142</span>, <span class="op">-</span><span class="fl">0.432</span>, <span class="op">-</span><span class="fl">0.938</span>, <span class="op">-</span><span class="fl">0.729</span>, <span class="op">-</span><span class="fl">0.846</span>, <span class="op">-</span><span class="fl">0.157</span>, <span class="fl">0.500</span>, <span class="fl">1.183</span>, <span class="op">-</span><span class="fl">1.075</span>, <span class="op">-</span><span class="fl">0.169</span>]</span>
+<span id="cb79-6"><a href="hypothesis-testing.html#cb79-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-7"><a href="hypothesis-testing.html#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test</span></span>
+<span id="cb79-8"><a href="hypothesis-testing.html#cb79-8" aria-hidden="true" tabindex="-1"></a>stat, p <span class="op">=</span> ttest_ind(data1, data2)</span>
+<span id="cb79-9"><a href="hypothesis-testing.html#cb79-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-10"><a href="hypothesis-testing.html#cb79-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;stat=</span><span class="sc">%.3f</span><span class="st">, p=</span><span class="sc">%.3f</span><span class="st">&#39;</span> <span class="op">%</span> (stat, p))</span></code></pre></div>
+<pre><code>## stat=-0.326, p=0.748</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="hypothesis-testing.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb81-2"><a href="hypothesis-testing.html#cb81-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;Probably the same distribution&#39;</span>)</span>
+<span id="cb81-3"><a href="hypothesis-testing.html#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb81-4"><a href="hypothesis-testing.html#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;Probably different distributions&#39;</span>)</span></code></pre></div>
+<pre><code>## Probably the same distribution</code></pre>
+<p>We can verify this result by using a normal distribution.</p>
+<p>For this, we use the function: <code>np.random.normal(mu, sigma, 1000)</code></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="hypothesis-testing.html#cb83-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-2"><a href="hypothesis-testing.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a normnal distribution with mean of 0 and a variance of 1</span></span>
+<span id="cb83-3"><a href="hypothesis-testing.html#cb83-3" aria-hidden="true" tabindex="-1"></a>mu_0, sigma_0 <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span></span>
+<span id="cb83-4"><a href="hypothesis-testing.html#cb83-4" aria-hidden="true" tabindex="-1"></a>normal_dist_0 <span class="op">=</span> np.random.normal(mu_0, sigma_0, <span class="dv">1000</span>)</span>
+<span id="cb83-5"><a href="hypothesis-testing.html#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="hypothesis-testing.html#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Chart</span></span>
+<span id="cb83-7"><a href="hypothesis-testing.html#cb83-7" aria-hidden="true" tabindex="-1"></a>count, bins, ignored <span class="op">=</span> plt.hist(normal_dist_0, <span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb83-8"><a href="hypothesis-testing.html#cb83-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-9"><a href="hypothesis-testing.html#cb83-9" aria-hidden="true" tabindex="-1"></a>plt.plot(bins, <span class="dv">1</span><span class="op">/</span>(sigma_0 <span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)) <span class="op">*</span></span>
+<span id="cb83-10"><a href="hypothesis-testing.html#cb83-10" aria-hidden="true" tabindex="-1"></a>               np.exp( <span class="op">-</span> (bins <span class="op">-</span> mu_0)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma_0<span class="op">**</span><span class="dv">2</span>) ),</span>
+<span id="cb83-11"><a href="hypothesis-testing.html#cb83-11" aria-hidden="true" tabindex="-1"></a>         linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb83-12"><a href="hypothesis-testing.html#cb83-12" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb83-13"><a href="hypothesis-testing.html#cb83-13" aria-hidden="true" tabindex="-1"></a>plt.show()         </span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-29-1.png" width="2592" /></p>
+<p>Now we’ll re-run the code, but change the sample mean to 1 rather than 0.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="hypothesis-testing.html#cb84-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-2"><a href="hypothesis-testing.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a normnal distribution with mean of 1 and a variance of 1</span></span>
+<span id="cb84-3"><a href="hypothesis-testing.html#cb84-3" aria-hidden="true" tabindex="-1"></a>mu_1, sigma_1 <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span></span>
+<span id="cb84-4"><a href="hypothesis-testing.html#cb84-4" aria-hidden="true" tabindex="-1"></a>normal_dist_1 <span class="op">=</span> np.random.normal(mu_1, sigma_1, <span class="dv">1000</span>)</span>
+<span id="cb84-5"><a href="hypothesis-testing.html#cb84-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="hypothesis-testing.html#cb84-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Chart</span></span>
+<span id="cb84-7"><a href="hypothesis-testing.html#cb84-7" aria-hidden="true" tabindex="-1"></a>count, bins, ignored <span class="op">=</span> plt.hist(normal_dist_1, <span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb84-8"><a href="hypothesis-testing.html#cb84-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-9"><a href="hypothesis-testing.html#cb84-9" aria-hidden="true" tabindex="-1"></a>plt.plot(bins, <span class="dv">1</span><span class="op">/</span>(sigma_1<span class="op">+</span><span class="dv">1</span> <span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)) <span class="op">*</span></span>
+<span id="cb84-10"><a href="hypothesis-testing.html#cb84-10" aria-hidden="true" tabindex="-1"></a>               np.exp( <span class="op">-</span> (bins <span class="op">-</span> mu_1)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma_1<span class="op">**</span><span class="dv">2</span>) ),</span>
+<span id="cb84-11"><a href="hypothesis-testing.html#cb84-11" aria-hidden="true" tabindex="-1"></a>         linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb84-12"><a href="hypothesis-testing.html#cb84-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-13"><a href="hypothesis-testing.html#cb84-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="series_files/figure-html/unnamed-chunk-30-3.png" width="2592" /></p>
+</div>
+<div id="testing-for-normality" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Testing for normality<a href="hypothesis-testing.html#testing-for-normality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Shapiro-Wilk test tests the null hypothesis that the data was drawn from a normal distribution.</p>
+<p><strong>Interpretation</strong></p>
+<ul>
+<li><p>H0: sample is from a normal distribution</p></li>
+<li><p>H1: sample is not from a normal distribution</p></li>
+</ul>
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="hypothesis-testing.html#cb85-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-2"><a href="hypothesis-testing.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb85-3"><a href="hypothesis-testing.html#cb85-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-4"><a href="hypothesis-testing.html#cb85-4" aria-hidden="true" tabindex="-1"></a>stats.shapiro(normal_dist_0)</span></code></pre></div>
+<pre><code>## ShapiroResult(statistic=0.9984456300735474, pvalue=0.5196242928504944)</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="hypothesis-testing.html#cb87-1" aria-hidden="true" tabindex="-1"></a>stats.shapiro(normal_dist_1)</span></code></pre></div>
+<pre><code>## ShapiroResult(statistic=0.9987215995788574, pvalue=0.7030749917030334)</code></pre>
+<p>We can see here that the p-values are huge (well above 0.05) - and we fail to reject the null hypothesis.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="making-beautiful-charts-in-python.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jules32/bookdown-tutorial/edit/master/04-hypothesis_testing.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["series.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

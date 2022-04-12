@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-
+<link rel="next" href="hypothesis-testing.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -155,6 +155,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.13" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#making-simple-maps-with-geopandas"><i class="fa fa-check"></i><b>2.13</b> Making simple maps with geopandas<span></span></a></li>
 <li class="chapter" data-level="2.14" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#geocoding-address-data"><i class="fa fa-check"></i><b>2.14</b> Geocoding address data<span></span></a></li>
 <li class="chapter" data-level="2.15" data-path="making-beautiful-charts-in-python.html"><a href="making-beautiful-charts-in-python.html#open-street-map"><i class="fa fa-check"></i><b>2.15</b> Open Street Map<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>3</b> Hypothesis testing<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-a-new-module"><i class="fa fa-check"></i><b>3.1</b> Importing a new module<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#importing-python-packages-2"><i class="fa fa-check"></i><b>3.2</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#correlation"><i class="fa fa-check"></i><b>3.3</b> Correlation<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#stationary-tests"><i class="fa fa-check"></i><b>3.4</b> Stationary tests<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#t-test-of-the-sample-mean"><i class="fa fa-check"></i><b>3.5</b> t-test of the sample mean<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-for-normality"><i class="fa fa-check"></i><b>3.6</b> Testing for normality<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression-analysis.html"><a href="regression-analysis.html"><i class="fa fa-check"></i><b>4</b> Regression analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regression-analysis.html"><a href="regression-analysis.html#importing-python-packages-3"><i class="fa fa-check"></i><b>4.1</b> Importing python packages<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="regression-analysis.html"><a href="regression-analysis.html#create-a-model-and-fit-it"><i class="fa fa-check"></i><b>4.2</b> Create a model and fit it<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="regression-analysis.html"><a href="regression-analysis.html#polynomial-regression"><i class="fa fa-check"></i><b>4.3</b> Polynomial regression<span></span></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
@@ -728,6 +743,160 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     resp = self._request(url, timeout=timeout, headers=headers)
 ##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/adapters.py&quot;, line 460, in _request
 ##     raise GeocoderUnavailable(message)
+## geopy.exc.GeocoderUnavailable: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Max retries exceeded with url: /search?q=1+Victoria+Street%2C+St+George%2C+4487%2C+Queensland%2C+Australia&amp;format=json&amp;limit=1 (Caused by ReadTimeoutError(&quot;HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)&quot;))
+## RateLimiter caught an error, retrying (1/2 tries). Called with (*(&#39;1 Victoria Street, St George, 4487, Queensland, Australia&#39;,), **{}).
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 445, in _make_request
+##     six.raise_from(e, None)
+##   File &quot;&lt;string&gt;&quot;, line 3, in raise_from
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 440, in _make_request
+##     httplib_response = conn.getresponse()
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/http/client.py&quot;, line 1374, in getresponse
+##     response.begin()
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/http/client.py&quot;, line 318, in begin
+##     version, status, reason = self._read_status()
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/http/client.py&quot;, line 279, in _read_status
+##     line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/socket.py&quot;, line 705, in readinto
+##     return self._sock.recv_into(b)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/ssl.py&quot;, line 1273, in recv_into
+##     return self.read(nbytes, buffer)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/ssl.py&quot;, line 1129, in read
+##     return self._sslobj.read(len, buffer)
+## TimeoutError: The read operation timed out
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 699, in urlopen
+##     httplib_response = self._make_request(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 447, in _make_request
+##     self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 336, in _raise_timeout
+##     raise ReadTimeoutError(
+## urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/adapters.py&quot;, line 439, in send
+##     resp = conn.urlopen(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 783, in urlopen
+##     return self.urlopen(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 783, in urlopen
+##     return self.urlopen(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 755, in urlopen
+##     retries = retries.increment(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/util/retry.py&quot;, line 574, in increment
+##     raise MaxRetryError(_pool, url, error or ResponseError(cause))
+## urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Max retries exceeded with url: /search?q=1+Victoria+Street%2C+St+George%2C+4487%2C+Queensland%2C+Australia&amp;format=json&amp;limit=1 (Caused by ReadTimeoutError(&quot;HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)&quot;))
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/adapters.py&quot;, line 448, in _request
+##     resp = self.session.get(url, timeout=timeout, headers=headers)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/sessions.py&quot;, line 555, in get
+##     return self.request(&#39;GET&#39;, url, **kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/sessions.py&quot;, line 542, in request
+##     resp = self.send(prep, **send_kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/sessions.py&quot;, line 655, in send
+##     r = adapter.send(request, **kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/adapters.py&quot;, line 516, in send
+##     raise ConnectionError(e, request=request)
+## requests.exceptions.ConnectionError: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Max retries exceeded with url: /search?q=1+Victoria+Street%2C+St+George%2C+4487%2C+Queensland%2C+Australia&amp;format=json&amp;limit=1 (Caused by ReadTimeoutError(&quot;HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)&quot;))
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/extra/rate_limiter.py&quot;, line 136, in _retries_gen
+##     yield i  # Run the function.
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/extra/rate_limiter.py&quot;, line 274, in __call__
+##     res = self.func(*args, **kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/geocoders/nominatim.py&quot;, line 297, in geocode
+##     return self._call_geocoder(url, callback, timeout=timeout)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/geocoders/base.py&quot;, line 368, in _call_geocoder
+##     result = self.adapter.get_json(url, timeout=timeout, headers=req_headers)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/adapters.py&quot;, line 438, in get_json
+##     resp = self._request(url, timeout=timeout, headers=headers)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/adapters.py&quot;, line 460, in _request
+##     raise GeocoderUnavailable(message)
+## geopy.exc.GeocoderUnavailable: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Max retries exceeded with url: /search?q=1+Victoria+Street%2C+St+George%2C+4487%2C+Queensland%2C+Australia&amp;format=json&amp;limit=1 (Caused by ReadTimeoutError(&quot;HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)&quot;))
+## RateLimiter swallowed an error after 2 retries. Called with (*(&#39;1 Victoria Street, St George, 4487, Queensland, Australia&#39;,), **{}).
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 445, in _make_request
+##     six.raise_from(e, None)
+##   File &quot;&lt;string&gt;&quot;, line 3, in raise_from
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 440, in _make_request
+##     httplib_response = conn.getresponse()
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/http/client.py&quot;, line 1374, in getresponse
+##     response.begin()
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/http/client.py&quot;, line 318, in begin
+##     version, status, reason = self._read_status()
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/http/client.py&quot;, line 279, in _read_status
+##     line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/socket.py&quot;, line 705, in readinto
+##     return self._sock.recv_into(b)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/ssl.py&quot;, line 1273, in recv_into
+##     return self.read(nbytes, buffer)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/ssl.py&quot;, line 1129, in read
+##     return self._sslobj.read(len, buffer)
+## TimeoutError: The read operation timed out
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 699, in urlopen
+##     httplib_response = self._make_request(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 447, in _make_request
+##     self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 336, in _raise_timeout
+##     raise ReadTimeoutError(
+## urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/adapters.py&quot;, line 439, in send
+##     resp = conn.urlopen(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 783, in urlopen
+##     return self.urlopen(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 783, in urlopen
+##     return self.urlopen(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/connectionpool.py&quot;, line 755, in urlopen
+##     retries = retries.increment(
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/urllib3/util/retry.py&quot;, line 574, in increment
+##     raise MaxRetryError(_pool, url, error or ResponseError(cause))
+## urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Max retries exceeded with url: /search?q=1+Victoria+Street%2C+St+George%2C+4487%2C+Queensland%2C+Australia&amp;format=json&amp;limit=1 (Caused by ReadTimeoutError(&quot;HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)&quot;))
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/adapters.py&quot;, line 448, in _request
+##     resp = self.session.get(url, timeout=timeout, headers=headers)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/sessions.py&quot;, line 555, in get
+##     return self.request(&#39;GET&#39;, url, **kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/sessions.py&quot;, line 542, in request
+##     resp = self.send(prep, **send_kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/sessions.py&quot;, line 655, in send
+##     r = adapter.send(request, **kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/requests/adapters.py&quot;, line 516, in send
+##     raise ConnectionError(e, request=request)
+## requests.exceptions.ConnectionError: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Max retries exceeded with url: /search?q=1+Victoria+Street%2C+St+George%2C+4487%2C+Queensland%2C+Australia&amp;format=json&amp;limit=1 (Caused by ReadTimeoutError(&quot;HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)&quot;))
+## 
+## During handling of the above exception, another exception occurred:
+## 
+## Traceback (most recent call last):
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/extra/rate_limiter.py&quot;, line 274, in __call__
+##     res = self.func(*args, **kwargs)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/geocoders/nominatim.py&quot;, line 297, in geocode
+##     return self._call_geocoder(url, callback, timeout=timeout)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/geocoders/base.py&quot;, line 368, in _call_geocoder
+##     result = self.adapter.get_json(url, timeout=timeout, headers=req_headers)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/adapters.py&quot;, line 438, in get_json
+##     resp = self._request(url, timeout=timeout, headers=headers)
+##   File &quot;/Users/charlescoverdale/Library/r-miniconda/envs/r-reticulate/lib/python3.10/site-packages/geopy/adapters.py&quot;, line 460, in _request
+##     raise GeocoderUnavailable(message)
 ## geopy.exc.GeocoderUnavailable: HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Max retries exceeded with url: /search?q=1+Victoria+Street%2C+St+George%2C+4487%2C+Queensland%2C+Australia&amp;format=json&amp;limit=1 (Caused by ReadTimeoutError(&quot;HTTPSConnectionPool(host=&#39;nominatim.openstreetmap.org&#39;, port=443): Read timed out. (read timeout=1)&quot;))</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="making-beautiful-charts-in-python.html#cb51-1" aria-hidden="true" tabindex="-1"></a>hospital_data[<span class="st">&#39;point&#39;</span>] <span class="op">=</span> hospital_data[<span class="st">&#39;location&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> loc: <span class="bu">tuple</span>(loc.point) <span class="cf">if</span> loc <span class="cf">else</span> <span class="va">None</span>)</span>
 <span id="cb51-2"><a href="making-beautiful-charts-in-python.html#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -973,8 +1142,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hypothesis-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

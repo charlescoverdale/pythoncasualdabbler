@@ -15,3 +15,14 @@ importing-python-packages-1
 making-simple-maps-with-geopandas
 geocoding-address-data
 open-street-map
+hypothesis-testing
+importing-a-new-module
+importing-python-packages-2
+correlation
+stationary-tests
+t-test-of-the-sample-mean
+testing-for-normality
+regression-analysis
+importing-python-packages-3
+create-a-model-and-fit-it
+polynomial-regression
