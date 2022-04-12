@@ -1,5 +1,4 @@
 welcome
-learn-all-about-bookdown
 making-beautiful-charts-in-python
 whats-in-a-chart
 importing-python-packages
@@ -11,10 +10,8 @@ scatter-plot
 histogram
 multiple-charts-in-single-plot
 annotating-charts
-setup
-get-bookdown-tutorial-going-on-your-local-computer
-create-your-awesome-book-github-repo
-turn-bookdown-tutorial-into-awesome-book
-publish-awesome-book
-moving-forward
-write
+making-maps-with-python
+importing-python-packages-1
+making-simple-maps-with-geopandas
+geocoding-address-data
+open-street-map

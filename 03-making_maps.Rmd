@@ -1,7 +1,7 @@
 
 ## Making maps with python
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -42,20 +42,20 @@ We'll go ahead and download some [shapefiles from the ABS.](https://www.abs.gov.
 ```{python, warning=FALSE, results=TRUE}
 
 # Read the SHP file
-SA2_shp = gpd.read_file('ASGS/SA2_2021_AUST_SHP_GDA2020/SA2_2021_AUST_GDA2020.shp')    
+SA4_shp = gpd.read_file('ASGS/SA4_2021_AUST_SHP_GDA2020/SA4_2021_AUST_GDA2020.shp')    
 
 # Load the data using Geopandas
-SA2_shp.head()
+SA4_shp.head()
 
 # Check the coordinate reference system attached to the shapefile
-SA2_shp.crs
+SA4_shp.crs
 
 # Filter the data for only Greater Melbourne
-SA2_shp_MEL = SA2_shp[SA2_shp['GCC_NAME21']=='Greater Melbourne'] 
-SA2_shp_MEL.head()
+SA4_shp_MEL = SA4_shp[SA4_shp['GCC_NAME21']=='Greater Melbourne'] 
+SA4_shp_MEL.head()
 
 # Quick plot of the shapefile
-SA2_shp_MEL.plot(figsize=(20, 20), linewidth=0.1, edgecolor='0.9', legend = True)
+SA4_shp_MEL.plot(figsize=(20, 20), linewidth=0.1, edgecolor='0.9', legend = True)
 
 plt.annotate('Melbourne\nCBD',
             xy=(144.96246,-37.81214),
