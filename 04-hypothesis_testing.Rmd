@@ -58,7 +58,7 @@ Pearson's Correlation Coefficient Tests whether two samples have a linear relati
 
 -   H1: there is a dependency between the samples.
 
-```{python, results='hide', warning=FALSE,message=FALSE}
+```{python, warning=FALSE,message=FALSE}
 
 # Example of the Pearson's Correlation test
 from scipy.stats import pearsonr
@@ -90,7 +90,7 @@ Interpretation
 
 -   H1: a unit root is not present (series is stationary).
 
-```{python, results='hide', warning=FALSE,message=FALSE}
+```{python, warning=FALSE,message=FALSE}
 
 # Example of the Augmented Dickey-Fuller unit root test
 from statsmodels.tsa.stattools import adfuller
@@ -125,7 +125,7 @@ Tests whether the means of two independent samples are significantly different.
 
 -   H1: the means of the samples are unequal.
 
-```{python, results='hide', warning=FALSE,message=FALSE}
+```{python, warning=FALSE,message=FALSE}
 
 # Example of the Student's t-test
 from scipy.stats import ttest_ind
@@ -147,7 +147,7 @@ We can verify this result by using a normal distribution.
 
 For this, we use the function: `np.random.normal(mu, sigma, 1000)`
 
-```{python, results='hide', warning=FALSE,message=FALSE}
+```{python, warning=FALSE,message=FALSE}
 
 # Create a normnal distribution with mean of 0 and a variance of 1
 mu_0, sigma_0 = 0, 1
@@ -166,7 +166,7 @@ plt.show()
 
 Now we'll re-run the code, but change the sample mean to 1 rather than 0.
 
-```{python, results='hide', warning=FALSE,message=FALSE}
+```{python, warning=FALSE,message=FALSE}
 
 # Create a normnal distribution with mean of 1 and a variance of 1
 mu_1, sigma_1 = 1, 1

@@ -8,7 +8,15 @@ This repo contains the code use to produce the first edition of [Python Cookbook
 
 -   The text is 100% written in python and R, and published using [Rmarkdown](https://rmarkdown.rstudio.com/) and [Bookdown](https://bookdown.org/)
 
--   New chapters will be released periodically
+-   New chapters will be released periodically.
+
+**Ideas for new chapters:**
+
+-   Text and sentiment analysis
+
+-   Web scraping
+
+-   Economics and time series analysis
 
 **Limitations:**
 
@@ -19,4 +27,4 @@ This repo contains the code use to produce the first edition of [Python Cookbook
 -   All code is open source and free to use. Feel free to use, adapt, and build upon any of the code or ideas.
 
 -   You are welcome to cite the text as:  
-    *Coverdale, C 2021, 'Python Cookbook for the Casual Dabbler', Australia*
+    *Coverdale, C 2022, 'Python Cookbook for the Casual Dabbler', Melbourne, Australia*

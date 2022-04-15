@@ -45,7 +45,13 @@ It's a fair question. The simplest answer is that the R Markdown and Bookdown la
 
 There are some quirks however. For example, to get python to run within the RStudio IDE I need to load up each chapter with some code (written in R) that looks something like this:
 
-`library(reticulate)use_condaenv("tf")reticulate::py_install("numpy")reticulate::py_install("geopy")`
+`library(reticulate)`
+
+`use_condaenv("tf")`
+
+`reticulate::py_install("numpy")`
+
+`reticulate::py_install("geopy")`
 
 Interested in publishing your own book using R Markdown or Bookdown? There's some [excellent books](https://bookdown.org/yihui/rmarkdown/) on the topic, however I find [this guide](https://jules32.github.io/bookdown-tutorial/setup.html#moving-forward) as by far the most useful.
 

@@ -1,6 +1,4 @@
-
 # Making beautiful charts in Python
-
 
 This chapter contains the code for some of my most used charts and visualization techniques.
 
@@ -30,7 +28,7 @@ from scipy.stats import norm
 from matplotlib.ticker import EngFormatter, StrMethodFormatter
 ```
 
-## Importing and cleaning data
+## Reading and cleaning data
 
 Let's start by importing data from a csv and making it usable. In this example, we'll use the weather profile from 2019 in Melbourne, Australia.
 
@@ -66,10 +64,9 @@ df_weather.head()
 
 ```
 
-## Creating a line chart
+## Line charts
 
 Now that the data is in a reasonable format (e.g. there is a simple to use 'Date' column), let's go ahead and make a line chart.
-
 
 ```{python, results='hide', warning=FALSE,message=FALSE}
 
@@ -127,10 +124,6 @@ plt.savefig('weather_chart_save.png',dpi=300,bbox_inches='tight')
 plt.show()
 
 ```
-
-
-
-
 
 ## Bar charts
 
@@ -199,7 +192,7 @@ ax.legend()
 plt.show()
 ```
 
-## Line charts
+## Line charts (from raw data)
 
 ```{python, results='hide', warning=FALSE,message=FALSE}
 
@@ -340,9 +333,203 @@ plt.text(61,180,"Labour\nSupply",size=8,color='k')
 
 plt.show()
 
+```
+
+## Mimicking The Economist
+
+The visual storytelling team at The Economist is absolutely world class. Their team is quite public about how they use both R and Python in their data science.
+
+[Robert Ritz](https://towardsdatascience.com/making-economist-style-plots-in-matplotlib-e7de6d679739) has done an outstanding job at [documenting](https://deepnote.com/@robertritz/Making-Economist-Style-Plots-in-Matplotlib-5RPoDvmqT0u3iqwkaNJJkw) how you can use their style when making charts.
+
+The [dataset](https://www.kaggle.com/datasets/holoong9291/gdp-of-all-countries19602020) we'll use is the GDP records from 1960-2020.
+
+```{python, results='hide', warning=FALSE,message=FALSE,attr.output='style="max-height: 300px;"'}
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# This makes out plots higher resolution, which makes them easier to see while building
+plt.rcParams['figure.dpi'] = 100
+
+gdp = pd.read_csv('data/gdp_1960_2020.csv')
+gdp.head()
+
+# The GDP numbers here are very long. To make them easier to read we can divide the GDP number by 1 trillion.
+
+gdp['gdp_trillions'] = gdp['gdp'] / 1_000_000_000_000
+
+# Now we can filter for only 2020 and grab the bottom 9. We do this instead of sorting by descending because Matplotlib plots from the bottom to top, so we actually want our data in reverse order.
+gdp[gdp['year'] == 2020].sort_values(by='gdp_trillions')[-9:]
+
+# Setup plot size.
+#fig, ax = plt.subplots(figsize=(3,6))
+plt.rcParams["figure.figsize"] = (3,6)
+
+# Create grid 
+# Zorder tells it which layer to put it on. We are setting this to 1 and our data to 2 so the grid is behind the data.
+ax.grid(which="major", axis='x', color='#758D99', alpha=0.6, zorder=1)
+
+# Remove splines. Can be done one at a time or can slice with a list.
+ax.spines[['top','right','bottom']].set_visible(False)
+
+# Make left spine slightly thicker
+ax.spines['left'].set_linewidth(1.1)
+ax.spines['left'].set_linewidth(1.1)
+
+# Setup data
+gdp['country'] = gdp['country'].replace('the United States', 'United States')
+gdp_bar = gdp[gdp['year'] == 2020].sort_values(by='gdp_trillions')[-9:]
+
+# Plot data
+ax.barh(gdp_bar['country'], gdp_bar['gdp_trillions'], color='#006BA2', zorder=2)
+
+# Set custom labels for x-axis
+ax.set_xticks([0, 5, 10, 15, 20])
+ax.set_xticklabels([0, 5, 10, 15, 20])
+
+# Reformat x-axis tick labels
+ax.xaxis.set_tick_params(labeltop=True,      # Put x-axis labels on top
+                         labelbottom=False,  # Set no x-axis labels on bottom
+                         bottom=False,       # Set no ticks on bottom
+                         labelsize=11,       # Set tick label size
+                         pad=-1)             # Lower tick labels a bit
+
+# Reformat y-axis tick labels
+ax.set_yticklabels(gdp_bar['country'],      # Set labels again
+                   ha = 'left')              # Set horizontal alignment to left
+ax.yaxis.set_tick_params(pad=100,            # Pad tick labels so they don't go over y-axis
+                         labelsize=11,       # Set label size
+                         bottom=False)       # Set no ticks on bottom/left
+
+# Shrink y-lim to make plot a bit tighter
+ax.set_ylim(-0.5, 8.5)
+
+# Add in line and tag
+ax.plot([-.35, .87],                 # Set width of line
+        [1.02, 1.02],                # Set height of line
+        transform=fig.transFigure,   # Set location relative to plot
+        clip_on=False, 
+        color='#E3120B', 
+        linewidth=.6)
+
+ax.add_patch(plt.Rectangle((-.35,1.02),                # Set location of rectangle by lower left corner
+                           0.12,                       # Width of rectangle
+                           -0.02,                      # Height of rectangle. Negative so it goes down.
+                           facecolor='#E3120B', 
+                           transform=fig.transFigure, 
+                           clip_on=False, 
+                           linewidth = 0))
+
+# Add in title and subtitle
+ax.text(x=-.35, y=.96, s="The big leagues", transform=fig.transFigure, ha='left', fontsize=13, weight='bold', alpha=.8)
+ax.text(x=-.35, y=.925, s="2020 GDP, trillions of USD", transform=fig.transFigure, ha='left', fontsize=11, alpha=.8)
+
+# Set source text
+ax.text(x=-.35, y=.08, s="""Source: "GDP of all countries (1960-2020)""", transform=fig.transFigure, ha='left', fontsize=9, alpha=.7)
+
+plt.show()
+
+# Export plot as high resolution PNG
+plt.savefig('docs/economist_bar.png',      # Set path and filename
+            dpi = 300,                     # Set dots per inch
+            bbox_inches="tight",           # Remove extra whitespace around plot
+            facecolor='white')             # Set background color to white
 
 ```
 
-```{python}
+We can do a similar process for line charts.
+
+```{python, results='hide', warning=FALSE,message=FALSE}
+
+countries = gdp[gdp['year'] == 2020].sort_values(by='gdp_trillions')[-9:]['country'].values
+countries
+
+gdp['date'] = pd.to_datetime(gdp['year'], format='%Y')
+
+# Setup plot size.
+fig, ax = plt.subplots(figsize=(8,4))
+
+# Create grid 
+# Zorder tells it which layer to put it on. We are setting this to 1 and our data to 2 so the grid is behind the data.
+ax.grid(which="major", axis='y', color='#758D99', alpha=0.6, zorder=1)
+
+# Plot data
+# Loop through country names and plot each one.
+for country in countries:
+    ax.plot(gdp[gdp['country'] == country]['date'], 
+            gdp[gdp['country'] == country]['gdp_trillions'], 
+            color='#758D99', 
+            alpha=0.8, 
+            linewidth=3)
+
+# Plot US and China separately
+ax.plot(gdp[gdp['country'] == 'United States']['date'], 
+        gdp[gdp['country'] == 'United States']['gdp_trillions'], 
+        color='#006BA2',
+        linewidth=3)
+
+ax.plot(gdp[gdp['country'] == 'China']['date'], 
+        gdp[gdp['country'] == 'China']['gdp_trillions'], 
+        color='#3EBCD2',
+        linewidth=3)
+
+# Remove splines. Can be done one at a time or can slice with a list.
+ax.spines[['top','right','left']].set_visible(False)
+
+# Shrink y-lim to make plot a bit tigheter
+ax.set_ylim(0, 23)
+
+# Set xlim to fit data without going over plot area
+ax.set_xlim(pd.datetime(1958, 1, 1), pd.datetime(2023, 1, 1))
+
+# Reformat x-axis tick labels
+ax.xaxis.set_tick_params(labelsize=11)        # Set tick label size
+
+# Reformat y-axis tick labels
+ax.set_yticklabels(np.arange(0,25,5),            # Set labels again
+                   ha = 'right',                 # Set horizontal alignment to right
+                   verticalalignment='bottom')   # Set vertical alignment to make labels on top of gridline      
+
+ax.yaxis.set_tick_params(pad=-2,             # Pad tick labels so they don't go over y-axis
+                         labeltop=True,      # Put x-axis labels on top
+                         labelbottom=False,  # Set no x-axis labels on bottom
+                         bottom=False,       # Set no ticks on bottom
+                         labelsize=11)       # Set tick label size
+
+# Add labels for USA and China
+ax.text(x=.63, y=.67, s='United States', transform=fig.transFigure, size=10, alpha=.9)
+ax.text(x=.7, y=.4, s='China', transform=fig.transFigure, size=10, alpha=.9)
+
+
+# Add in line and tag
+ax.plot([0.12, .9],                  # Set width of line
+        [.98, .98],                  # Set height of line
+        transform=fig.transFigure,   # Set location relative to plot
+        clip_on=False, 
+        color='#E3120B', 
+        linewidth=.6)
+ax.add_patch(plt.Rectangle((0.12,.98),                 # Set location of rectangle by lower left corder
+                           0.04,                       # Width of rectangle
+                           -0.02,                      # Height of rectangle. Negative so it goes down.
+                           facecolor='#E3120B', 
+                           transform=fig.transFigure, 
+                           clip_on=False, 
+                           linewidth = 0))
+
+# Add in title and subtitle
+ax.text(x=0.12, y=.91, s="Ahead of the pack", transform=fig.transFigure, ha='left', fontsize=13, weight='bold', alpha=.8)
+ax.text(x=0.12, y=.86, s="Top 9 GDP's by country, in trillions of USD, 1960-2020", transform=fig.transFigure, ha='left', fontsize=11, alpha=.8)
+
+# Set source text
+ax.text(x=0.12, y=0.01, s="""Source: GDP of all countries (1960-2020)""", transform=fig.transFigure, ha='left', fontsize=9, alpha=.7)
+
+# Export plot as high resolution PNG
+plt.savefig('docs/economist_line.png',    # Set path and filename
+            dpi = 300,                     # Set dots per inch
+            bbox_inches="tight",           # Remove extra whitespace around plot
+            facecolor='white')             # Set background color to white
+
+plt.show()
 
 ```

@@ -68,7 +68,7 @@ plt.annotate('Melbourne\nCBD',
             xytext=(144.46246,-38.21),
             arrowprops = dict(arrowstyle='-'))
 
-plt.title("SA2's of Greater Melbourne", fontsize=12)
+plt.title("SA2's of Greater Melbourne", fontsize=18)
 
 plt.gca().axis('off')
 
@@ -85,7 +85,7 @@ WA_shp = gpd.read_file('data/NOV21_WA_LOC_POLYGON_shp_GDA2020/wa_localities.shp'
 
 WA_shp.plot(figsize=(20, 20), linewidth=0.1, color='green', edgecolor='0.9', legend = True)
 
-plt.title("Western Australia", fontsize=12)
+plt.title("Western Australia", fontsize=18)
 
 plt.gca().axis('off')
 
