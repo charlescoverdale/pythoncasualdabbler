@@ -34,6 +34,7 @@ The Python community is continually writing new books and package documentation 
 
 -   [Python Beginners Guide](https://wiki.python.org/moin/BeginnersGuide/Programmers)
 -   [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+-   [Coding for Economists](https://aeturrell.github.io/coding-for-economists/vis-intro.html)
 
 ## Limitations
 

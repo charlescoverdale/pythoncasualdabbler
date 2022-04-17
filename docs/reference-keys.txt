@@ -20,7 +20,6 @@ making-maps-with-python
 importing-python-packages-1
 making-simple-maps-with-geopandas
 geocoding-address-data
-open-street-map
 hypothesis-testing
 importing-a-new-module
 importing-python-packages-2
@@ -32,3 +31,7 @@ regression-analysis
 importing-python-packages-3
 create-a-model-and-fit-it
 polynomial-regression
+section
+time-series
+australian-economic-data
+seasonally-adjusted-data

@@ -7,6 +7,7 @@ rmd_files: [
   "02-charts.Rmd",
   "03-making_maps.Rmd", 
   "04-hypothesis_testing.Rmd",
-  "05-regression_analysis.Rmd"]
+  "05-regression_analysis.Rmd", 
+  "06-timeseries.Rmd"]
 delete_merged_file: true 
 output_dir: "docs"
